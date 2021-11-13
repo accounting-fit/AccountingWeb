@@ -1,0 +1,241 @@
+﻿
+@{
+    ViewData["Title"] = "Edit Customer & Supplier";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Style{
+    <style>
+        * {
+            font-family: Inter;
+            font-style: normal;
+        }
+
+        #repositoryId .select2-container--default .select2-selection--single {
+            border-radius: 0px !important;
+        }
+
+        input.ng-touched.ng-invalid {
+            border: 2px solid red;
+        }
+    </style>
+
+}
+<div class="card" ng-controller="CustomerSupplierController" ng-init="GetById('@ViewBag.Id')">
+    <form name="frm">
+        <div class="card-body">
+            <div class="shadow rounded">
+                <div class="title text-center w-100 pt-2 text-dark font-weight-bolder">Customer Supplier</div>
+                <hr class="border-bottom-light mb-0" />
+                <div class="p-2">
+                    <div class="row" id="firstDiv">
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="scaleType">Scale Type (Y) <span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
+                            <select ng-model="model.scaleType" ng-change="divShowHide()" class="form-control form-control-sm" id="scaleType" name="scaleType" required>
+                                <option value="1">individual</option>
+                                <option value="0">organization</option>
+                            </select>
+                            <span ng-show="frm.scaleType.$touched && frm.scaleType.$invalid" style="color:red">Scale Type is required.</span>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="objectType">Object Type (Z) <span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
+                            <select ng-model="model.objectType" class="form-control form-control-sm" id="objectType" name="objectType" required>
+                                <option value="0">customer</option>
+                                <option value="1">supplier</option>
+                                <option value="2">customer/supplier</option>
+                                <option value="3">other</option>
+                            </select>
+                            <span ng-show="frm.objectType.$touched && frm.objectType.$invalid" style="color:red">Object Type is required.</span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row" id="secondDiv">
+                        <div class="col-12 mb-2">
+                            <div class="title text-center w-100 pt-2 text-dark font-weight-bolder">Individual</div>
+                            <hr class="border-bottom-light mb-0" />
+                        </div>
+
+                        <div class="col-4 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="accountingObjectCode">Accounting Object Code (1) <span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
+                            <input ng-model="model.accountingObjectCode" placeholder="" type="text" class="form-control form-control-sm" id="accountingObjectCode" name="accountingObjectCode" required />
+                            <span ng-show="frm.accountingObjectCode.$touched && frm.accountingObjectCode.$invalid" style="color:red">Accounting Object Code is required.</span>
+                        </div>
+                        <div class="col-8 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="accountingObjectName">Accounting Object Name (4) <span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
+                            <input ng-model="model.accountingObjectName" placeholder="" type="text" class="form-control form-control-sm" id="accountingObjectName" name="accountingObjectName" required />
+                            <span ng-show="frm.accountingObjectName.$touched && frm.accountingObjectName.$invalid" style="color:red">Accounting Object Name is required.</span>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="tel">Tel (2)</label>
+                            <input ng-model="model.tel" placeholder="" type=text class="form-control form-control-sm" id="tel" name="tel" ng-pattern="/^[0-9]*$/" />
+                            <span ng-show="frm.tel.$touched && frm.tel.$invalid" style="color:red">Please provide number only</span>
+                        </div>
+                        <div class="col-8 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="address">Address (5)</label>
+                            <input ng-model="model.address" placeholder="" type="text" class="form-control form-control-sm" id="address" />
+                        </div>
+
+                        <div class="col-4 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="taxCode">Tax Code  </label>
+                            <input ng-model="model.taxCode" placeholder="" type="text" class="form-control form-control-sm" id="taxCode" name="taxCode" ng-pattern="/^\d{10}-{0,1}\d{0,3}?$/" />
+                            <span ng-show="frm.taxCode.$touched && frm.taxCode.$invalid" style="color:red">Please provide valid tax code [ Format : xxyyyyyyyz-ttt, Example : 0101589222 OR 0101589222-001 Description : xx = 2 Digit Provine code,yyyyyyy = 7 Digit Random Code,z = 1 Digit Test Code, - = Separator Character, ttt = 3 Digit Branch Code (10 first number is compulsory, other isn't) </span>
+                        </div>
+
+                        <div class="col-4 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="email">Email</label>
+                            <input ng-model="model.email" placeholder="" type="email" class="form-control form-control-sm" id="email" name="email" />
+                            <span ng-show="frm.email.$touched && frm.email.$invalid" style="color:red">Please provide valid email</span>
+                        </div>
+
+                        <div class="col-4 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="website">Website</label>
+                            <input ng-model="model.website" placeholder="" type="text" class="form-control form-control-sm" id="website" />
+                        </div>
+
+
+                        <div class="col-4 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="fax">Fax</label>
+                            <input ng-model="model.fax" placeholder="" type="text" class="form-control form-control-sm" id="fax" />
+                        </div>
+
+                        <div class="col-4 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="maximizaDebtAmount">Maximiza Debt Amount</label>
+                            <input ng-model="model.maximizaDebtAmount" placeholder="" type=text class="form-control form-control-sm" id="maximizaDebtAmount" name="maximizaDebtAmount" ng-pattern="/^\d{0,100}.{0,1}\d{0,4}?$/" />
+                            <span ng-show="frm.maximizaDebtAmount.$touched && frm.maximizaDebtAmount.$invalid" style="color:red">Please provide number only</span>
+                        </div>
+
+                        <div class="col-4 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="dueTime">due Time</label>
+                            <input ng-model="model.dueTime" placeholder="" type=text class="form-control form-control-sm" id="dueTime" name="dueTime" ng-pattern="/^[0-9]*$/" />
+                            <span ng-show="frm.dueTime.$touched && frm.dueTime.$invalid" style="color:red">Please provide number only</span>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="paymentClauseID">Payment Clause ID</label>
+                            <select ng-model="model.paymentClauseID" id="paymentClauseID" class="form-control form-control-sm">
+                                <option data-ng-repeat="i in GetAllAccountingObjectGroup" value="{{i.id}}">{{i.text}}</option>
+
+                            </select>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="objectType">Account Object Group ID</label>
+                            <select ng-model="model.accountObjectGroupID" id="accountObjectGroupID" class="form-control form-control-sm">
+                                <option data-ng-repeat="i in GetAllPaymentClause" value="{{i.id}}">{{i.text}}</option>
+
+                            </select>
+                        </div>
+
+                        <div class="col-2 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="isEmployee">Is Employee</label>
+                        </div>
+                        <div class="col-1 mb-2">
+                            <input ng-model="model.isEmployee" type="checkbox" class="form-control form-control-sm" id="isEmployee" style="width:35%" />
+                        </div>
+
+
+                        <div class="col-1 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="IsActive">Active<span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
+                        </div>
+                        <div class="col-1 mb-2">
+                            <input ng-model="model.isActive" required type="checkbox" class="form-control form-control-sm" id="isActive" style="width:35%" />
+                        </div>
+
+                    </div>
+
+                    <div class="row" id="thirdDiv">
+                        <div class="col-12 mb-2">
+                            <div class="title text-center w-100 pt-2 text-dark font-weight-bolder">organization</div>
+                            <hr class="border-bottom-light mb-0" />
+                        </div>
+
+                        <div class="col-4 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="contactName">Contact Name</label>
+                            <input ng-model="model.contactName" placeholder="" type="text" class="form-control form-control-sm" id="contactName" />
+                        </div>
+
+                        <div class="col-4 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="contactTitle">Contact Title</label>
+                            <input ng-model="model.contactTitle" placeholder="" type="text" class="form-control form-control-sm" id="contactTitle" />
+                        </div>
+
+                        <div class="col-4 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="contactSex">Contact Sex</label>
+                            <select ng-model="model.contactSex" id="contactSex" class="form-control form-control-sm" style="width: 100% !important;">
+                                <option value="0">Male</option>
+                                <option value="1">Female</option>
+                            </select>
+                        </div>
+
+
+                        <div class="col-8 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="contactAddress">Contact Address</label>
+                            <input ng-model="model.contactAddress" placeholder="" type="text" class="form-control form-control-sm" id="contactAddress" />
+                        </div>
+
+                        <div class="col-4 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="contactMobile">Contact Mobile</label>
+                            <input ng-model="model.contactMobile" placeholder="" type=text class="form-control form-control-sm" id="contactMobile" name="contactMobile" ng-pattern="/^[0-9]*$/" />
+                            <span ng-show="frm.contactMobile.$touched && frm.contactMobile.$invalid" style="color:red">Please provide number only</span>
+                        </div>
+
+
+                        <div class="col-4 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="ContactEmail">contact Email</label>
+                            <input ng-model="model.contactEmail" placeholder="" type="text" class="form-control form-control-sm" id="contactEmail" name="contactEmail" />
+                            <span ng-show="frm.contactEmail.$touched && frm.contactEmail.$invalid" style="color:red">Please provide valid email</span>
+                        </div>
+
+
+                        <div class="col-4 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="contactHomeTel">contact Home Tel</label>
+                            <input ng-model="model.contactHomeTel" placeholder="" type=text class="form-control form-control-sm" id="contactHomeTel" name="contactHomeTel" ng-pattern="/^[0-9]*$/" />
+                            <span ng-show="frm.contactHomeTel.$touched && frm.contactHomeTel.$invalid" style="color:red">Please provide number only</span>
+                        </div>
+
+
+
+                        <div class="col-4 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="contactOfficeTel">Contact Office Tel</label>
+                            <input ng-model="model.contactOfficeTel" placeholder="" type=text class="form-control form-control-sm" id="contactOfficeTel" name="contactOfficeTel" ng-pattern="/^[0-9]*$/" />
+                            <span ng-show="frm.contactOfficeTel.$touched && frm.contactOfficeTel.$invalid" style="color:red">Please provide number only</span>
+                        </div>
+
+
+                        <div class="col-4 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="identificationNo">Identification No</label>
+                            <input ng-model="model.identificationNo" placeholder="" type=text class="form-control form-control-sm" id="identificationNo" name="identificationNo" ng-pattern="/^[0-9]*$/" />
+                            <span ng-show="frm.identificationNo.$touched && frm.identificationNo.$invalid" style="color:red">Please provide number only</span>
+                        </div>
+
+
+                        <div class="col-4 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="issueDate">Issue Date</label>
+                            <input ng-model="model.issueDate" placeholder="" type="date" class="form-control form-control-sm" id="issueDate" />
+                        </div>
+
+
+                        <div class="col-4 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="issueBy">Issue By</label>
+                            <input ng-model="model.issueBy" placeholder="" type="text" class="form-control form-control-sm" id="issueBy" />
+                        </div>
+
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-right">
+            <div class="card-footer text-right">
+                <button type="button" ng-click="Update(1)" ng-disabled="frm.$invalid" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> &nbsp;Update & Exit</button>
+                <a href="/CustomerSupplier/Index" class="btn btn-sm btn-danger"><i class="fas fa-times-circle"></i> &nbsp;Cancel</a>
+            </div>
+        </div>
+    </form>
+
+</div>
+@section Scripts{
+    <script src="~/js/angularjsservices/customersupplierservice.js"></script>
+}

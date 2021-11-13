@@ -1,0 +1,187 @@
+﻿
+@{
+    ViewData["Title"] = "Tehm moi vat tu, hang hoa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Style{ 
+<style>
+    * {
+        font-family: Inter;
+        font-style: normal;
+    }
+    #repositoryId .select2-container--default .select2-selection--single {
+        border-radius: 0px !important;
+    }
+</style>
+}
+<div class="card" ng-controller="CategoryController" ng-init="OnInit()">
+    <form name="model">
+        <div class="card-body">
+            <div class="shadow rounded">
+                <div class="title text-center w-100 pt-2 text-dark font-weight-bolder">Thong tin chung</div>
+                <hr class="border-bottom-light mb-0" />
+                <div class="p-2">
+                    <div class="row">
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="matGoodsCode">Ma<span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
+                            <input ng-model="model.matGoodsCode" placeholder="Ma (*)" required type="text" class="form-control form-control-sm" id="matGoodsCode" />
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="matGoodsName">Ten<span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
+                            <input ng-model="model.matGoodsName" placeholder="Ten (*)" required type="text" class="form-control form-control-sm" id="matGoodsName" />
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="customCode">Tinh chat<span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
+                            <select ng-model="model.customCode" id="customCode" class="form-control form-control-sm" required>
+                                <option value="1">Vat tu hang hoa</option>
+                                <option value="2">VTHH lap rap/thao do</option>
+                                <option value="3">Dich vu</option>
+                                <option value="4">Thanh pham</option>
+                                <option value="5">Chi la dien giai</option>
+                                <option value="6">Khac</option>
+                            </select>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="matGoodsCatId">Loi</label>
+                            <select ng-model="model.matGoodsCatId" id="matGoodsCatId" class="form-control form-control-sm">
+                                <option ng-repeat="matcat in matGoodsCatList" value="{{matcat.id}}">{{matcat.materialGoodsCategoryCode}}</option>
+                            </select>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="unit">Don vi tinh</label>
+                            <input ng-model="model.unit" placeholder="Don vi tinh" type="text" class="form-control form-control-sm" id="unit" />
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="warrantyTime">Thoi han BH</label>
+                            <select ng-model="model.warrantyTime" id="warrantyTime" class="form-control form-control-sm">
+                                <option ng-repeat="item in warrantyTimeList" value="{{item.value}}">{{item.text}}</option>
+                            </select>
+                        </div>
+                        <div class="col-6 mb-2"></div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="minimumStock">So luong ton toi thieu</label>
+                            <input ng-model="model.minimumStock" placeholder="So luong ton toi thieu" type="text" class="form-control form-control-sm" id="minimumStock" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shadow rounded mt-2">
+                <div class="title text-center w-100 pt-2 text-dark font-weight-bolder">Thong tin ngum dinh</div>
+                <hr class="border-bottom-light mb-0" />
+                <div class="p-2">
+                    <div class="row">
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="purchasePrice">Don gia mua</label>
+                            <input ng-model="model.purchasePrice" placeholder="Don gia mua" type="text" class="form-control form-control-sm" id="purchasePrice" />
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="salesPrice">Don gia ban</label>
+                            <div class="input-group">
+                                <input ng-model="model.salesPrice" placeholder="Don gia ban" type="text" class="form-control form-control-sm" id="salesPrice" />
+                                <div class="input-group-append">
+                                    <button class="btn btn-sm btn-primary"><i class="fas fa-ellipsis-h"></i></button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="repositoryId">Kho ngam dinh</label>
+                            <div class="input-group">
+                                <select ng-model="model.repositoryId" id="repositoryId" class="form-control form-control-sm" required>
+                                    <option ng-repeat="repoItem in repositoryList" value="{{repoItem.id}}">{{repoItem.repositoryCode}}</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <button class="btn btn-sm btn-primary" style="height: 28px;"><i class="fas fa-plus"></i></button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="taxRate">Thue Suat(%)</label>
+                            <select ng-model="model.taxRate" id="taxRate" class="form-control form-control-sm">
+                                <option value="10">10%</option>
+                                <option value="20">20%</option>
+                                <option value="30">30%</option>
+                                <option value="40">40%</option>
+                            </select>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="expanceAccount">Tk chi phi</label>
+                            <select ng-model="model.expanceAccountId" id="expanceAccount" class="form-control form-control-sm">
+                                <option value="551">551</option>
+                                <option value="552">552</option>
+                                <option value="553">553</option>
+                                <option value="554">554</option>
+                            </select>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="repositoryAccount">Tai khoan kho</label>
+                            <select ng-model="model.repositoryAccountId" id="repositoryAccount" class="form-control form-control-sm">
+                                <option value="551">551</option>
+                                <option value="552">552</option>
+                                <option value="553">553</option>
+                                <option value="554">554</option>
+                            </select>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="purchaseDiscountRate">Ty le CKMH(%)</label>
+                            <input ng-model="model.purchaseDiscountRate" placeholder="Ty le CKMH(%)" type="text" class="form-control form-control-sm" id="purchaseDiscountRate" />
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="revenueAccount">Tk doanh thu</label>
+                            <select ng-model="model.revenueAccountId" id="revenueAccount" class="form-control form-control-sm">
+                                <option value="5511">5511</option>
+                                <option value="5522">5522</option>
+                                <option value="5533">5533</option>
+                                <option value="5544">5544</option>
+                            </select>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="salesDiscountRate">Ty le CKBH(%)</label>
+                            <input ng-model="model.salesDiscountRate" placeholder="Ty le CKBH(%)" type="text" class="form-control form-control-sm" id="salesDiscountRate" />
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="Nhom">Nhom HHDV chiu thue TTDB</label>
+                            <select ng-model="model.Nhom" id="Nhom" class="form-control form-control-sm">
+                                <option value="511">511</option>
+                                <option value="522">522</option>
+                                <option value="533">533</option>
+                                <option value="544">544</option>
+                            </select>
+                        </div>
+                        <div class="col-6 mb-2"></div>
+                        <div class="col-6 mb-2">
+                            <div class="row">
+                                <div class="col-10">
+                                    <div class="custom-control custom-checkbox">
+                                        <input ng-model="model.NhomisSalesDiscountPolicy" type="checkbox" class="custom-control-input" id="isSalesDiscountPolicy">
+                                        <label class="custom-control-label text-dark" for="isSalesDiscountPolicy">Chinh sach CK ban hang</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <button class="btn btn-sm btn-primary" disabled><i class="fas fa-ellipsis-h"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="itemSource">Nguan goc</label>
+                            <input ng-model="model.itemSource" placeholder="Nguan goc" type="text" class="form-control form-control-sm" id="itemSource" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-right">
+            <button type="button" ng-click="Save(1)" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> &nbsp;Luu va Them muoi</button>
+            <button type="button" ng-click="Save(0)" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> &nbsp;Luu lai</button>
+            <a href="/Home/CategoryIndex" class="btn btn-sm btn-danger"><i class="fas fa-times-circle"></i> &nbsp;Dong</a>
+        </div>
+    </form>
+   
+</div>
+@section Scripts{ 
+    <script src="~/js/angularjsservices/categoryservice.js"></script>
+    <script src="~/js/angularjsservices/globalservices.js"></script>
+}

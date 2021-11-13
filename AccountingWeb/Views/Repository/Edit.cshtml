@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewData["Title"] = "Edit Repository";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Style{
+    <style>
+        * {
+            font-family: Inter;
+            font-style: normal;
+        }
+
+        #repositoryId .select2-container--default .select2-selection--single {
+            border-radius: 0px !important;
+        }
+        input.ng-touched.ng-invalid {
+            border: 2px solid red;
+        }
+     
+    </style>
+}
+<div class="card" ng-controller="RepositoryController" ng-init="GetById('@ViewBag.Id')">
+    <form name="frm">
+        <div class="card-body">
+            <div class="shadow rounded">
+                <div class="title text-center w-100 pt-2 text-dark font-weight-bolder">Repository</div>
+                <hr class="border-bottom-light mb-0" />
+                <div class="p-2">
+                    <div class="row">
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="repositoryCode">Repository Code (A)<span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
+                            <input ng-model="model.repositoryCode" placeholder="" type="text" class="form-control form-control-sm" id="repositoryCode" name="repositoryCode" required />
+                            <span ng-show="frm.repositoryCode.$touched && frm.repositoryCode.$invalid" style="color:red">Repository Code is required.</span>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="repositoryName">Repository Name (B)<span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
+                            <input ng-model="model.repositoryName" placeholder="" type="text" class="form-control form-control-sm" id="repositoryName" name="repositoryName" required />
+                            <span ng-show="frm.repositoryName.$touched && frm.repositoryName.$invalid" style="color:red">Repository Name is required.</span>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="repositoryName">Description (C)</label>
+                            <input ng-model="model.description" placeholder="" type="text" class="form-control form-control-sm" id="description" />
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="defaultAccount">Default Account (D)<span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
+                            <select ng-model="model.defaultAccount" class="form-control form-control-sm" id="defaultAccount" name="defaultAccount" required>                               
+                                <option value="152">152</option>
+                                <option value="153">153</option>
+                                <option value="154">154</option>
+                                <option value="155">155</option>
+                                <option value="156">156</option>
+                                <option value="157">157</option>
+                            </select>
+                            <span ng-show="frm.defaultAccount.$touched && frm.defaultAccount.$invalid" style="color:red">Default Account is required.</span>
+                        </div>
+
+                        <div class="col-2 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="IsActive">Active (E)</label>
+                        </div>
+                        <div class="col-1 mb-2">
+                            <input ng-model="model.isActive" type="checkbox" class="form-control form-control-sm" id="isActive" style="width:35%" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-right">
+            <button type="button" ng-click="Update(1)" ng-disabled="frm.$invalid" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> &nbsp;Update & Exit</button>           
+            <a href="/Repository/Index" class="btn btn-sm btn-danger"><i class="fas fa-times-circle"></i> &nbsp;Cancel</a>
+        </div>
+    </form>
+
+</div>
+@section Scripts{
+    <script src="~/js/angularjsservices/repositoryservice.js"></script>
+}
