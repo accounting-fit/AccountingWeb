@@ -12,6 +12,7 @@ using AccountingWeb.Models.EntityModels;
 using System.IO;
 using ClosedXML.Excel;
 using System.Data;
+using AccountingWeb.Models.CommonModels;
 
 namespace AccountingWeb.ApiController
 {
@@ -24,7 +25,7 @@ namespace AccountingWeb.ApiController
         [Route("GetAll")]
         public async Task<IActionResult> GetAll()
         {
-            string SelectedAllDataQuery = @"SELECT * FROM [Repository] ORDER BY RepositoryName";
+            string SelectedAllDataQuery = @"SELECT * FROM [Repository] ORDER BY ID Desc";
             using (var con = new SqlConnection(GlobalClass.ConnectionString))
             {
                 await con.OpenAsync();
@@ -54,7 +55,7 @@ namespace AccountingWeb.ApiController
 
             RepositoryViewModel entity = new RepositoryViewModel()
             {
-                ID = Guid.NewGuid(),
+                ID = SequentialGuid.NewGuid(),
                 BranchID =model.BranchID,
                 RepositoryCode = model.RepositoryCode,
                 RepositoryName = model.RepositoryName,

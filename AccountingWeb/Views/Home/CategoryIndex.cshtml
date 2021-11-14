@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "CategoryIndex";
+    ViewData["Title"] = "Category List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -118,7 +118,6 @@
             </div>
             <div class="col-6 pr-3 pl-3 text-right">
                 <a href="/Home/CategoryCreate" class="text-white btn bg-gradient-info btn-xs btn-filter mr-2" type="button"><i class="fas fa-save"></i>&nbsp;Add</a>
-                <button class="text-white btn bg-gradient-success btn-xs btn-filter mr-2" type="button"><i class="fas fa-edit"></i>&nbsp;Edit</button><button class="text-white btn bg-gradient-danger btn-xs btn-filter mr-2" type="button"><i class="fas fa-trash"></i>&nbsp;Delete</button>
                 <button title="Export To Excel" ng-click="ExportToExcel()" class="text-white btn bg-gradient-primary btn-xs btn-filter" type="button"><i class="fas fa-file-excel"></i>&nbsp;Export</button>
             </div>
         </div>
@@ -126,93 +125,45 @@
             <table id="category" class="table table-sm">
                 <thead>
                     <tr>
-                        <th>
-                            <input type="checkbox" />
-                        </th>
                         <th>Ma Hang</th>
                         <th>Ten Hang</th>
                         <th>Tin Chat VTH</th>
                         <th>DVT</th>
                         <th>So luong ton</th>
                         <th>Gia tri ton</th>
-                        <th>
-                            @*<button title="View More" type="button" class="btn btn-sm bg-transparent border-0"><i class="fas fa-ellipsis-v"></i></button>*@
-                            Trinh tang
-                        </th>
+                        <th>Trinh tang</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody style="background-color:white;">
                     <tr ng-repeat="item in IndexTable">
-                        <td><input type="checkbox" /></td>
                         <td>
                             <span class="table-data-font">{{item.materialGoodsCode}}</span><br />
-                            @*<span class="table-data-font-sm">example@email.com</span>*@
                         </td>
                         <td>
                             <span class="table-data-font">{{item.materialGoodsName}}</span><br />
-
-                            @*<span class="table-data-font badge badge-default text-primary"> Active</span><br />
-                                <span class="table-data-font-sm">Last login: 14/APR/2020</span>*@
-
                         </td>
                         <td>
-                            @*<span class="table-data-font badge badge-pill badge-success text-primary"> Paid</span><br />
-                                <span class="table-data-font-sm">Paid on 15/APR/2020</span>*@
                             <span class="table-data-font">Tin Chat VTH</span><br />
                         </td>
                         <td>
-                            @*<span class="table-data-font">$200</span><br />
-                                <span class="table-data-font-sm">USD</span>*@
                             <span class="table-data-font">{{item.unit}}</span><br />
                         </td>
                         <td>
-                            @*<span class="table-data-font">Col1</span>*@
                             <span class="table-data-font">{{item.minimumStock}}</span>
-
                         </td>
                         <td>
                             <span class="table-data-font">Trinh tang</span>
                         </td>
                         <td style="padding-top: 1rem;" class="">
                             <span class="table-data-font">Gia tri ton</span>
-
-                            @*<span class="table-data-font-sm">View More</span>
-                                <button title="View More" type="button" class="btn btn-sm bg-transparent border-0"><i class="fas fa-ellipsis-v"></i></button>*@
+                        </td>
+                        <td>
+                            <a href="/Home/Edit/{{item.id}}" class="text-white btn bg-gradient-success btn-xs btn-filter mr-2" type="button"><i class="fas fa-edit"></i>&nbsp;Edit</a>
+                            <a href="/Home/Delete/{{item.id}}" class="text-white btn bg-gradient-danger btn-xs btn-filter mr-2" type="button"><i class="fas fa-trash"></i>&nbsp;Delete</a>
                         </td>
                     </tr>
-                    @*<tr>
-                            <td>
-                                <input type="checkbox" />
-                            </td>
-                            <td>
-                                <span class="table-data-font">Justin Septimus</span><br />
-                                <span class="table-data-font-sm">example@email.com</span>
-                            </td>
-                            <td>
-                                <span class="table-data-font badge badge-default text-primary"> Active</span><br />
-                                <span class="table-data-font-sm">Last login: 14/APR/2020</span>
 
-                            </td>
-                            <td>
-                                <span class="table-data-font badge badge-pill badge-success text-primary"> Paid</span><br />
-                                <span class="table-data-font-sm">Paid on 15/APR/2020</span>
-
-                            </td>
-                            <td>
-                                <span class="table-data-font">$200</span><br />
-                                <span class="table-data-font-sm">USD</span>
-                            </td>
-                            <td>
-                                <span class="table-data-font">Col1</span>
-                            </td>
-                            <td>
-                                <span class="table-data-font">Col2</span>
-                            </td>
-                            <td style="padding-top: 1rem;" class="text-right">
-                                <span class="table-data-font-sm">View More</span>
-                                <button title="View More" type="button" class="btn btn-sm bg-transparent border-0"><i class="fas fa-ellipsis-v"></i></button>
-                            </td>
-                        </tr>*@
 
                 </tbody>
                 <tfoot>

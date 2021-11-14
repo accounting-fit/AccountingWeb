@@ -158,6 +158,53 @@
             });
         }
 
+
+
+        $scope.DeleteById = function (id) {
+            debugger;
+
+            var url = '/ApiCategory/DeleteById/' + id;
+            $http({
+                method: 'POST',
+                url: url
+            }).then(function (response) {
+                if (response.status === 200) {
+                    if (response.data.ok) {
+
+
+                        swal({
+                            icon: "success",
+                            title: "Delete!",
+                            text: "Delete Success"
+                        }).then((result) => {
+                            $scope.AllClear();
+                            window.location.href = "/Home/CategoryIndex";
+                        });
+
+                    } else {
+                        console.log(response);
+                        swal({
+                            icon: "error",
+                            title: "Error!",
+                            text: "Delete fail",
+                            confirmButtonText: "OK"
+                        });
+                    }
+                } else {
+                    console.log(response);
+                    swal({
+                        icon: "error",
+                        title: "Error!",
+                        text: "Delete fail",
+                        confirmButtonText: "OK"
+                    });
+                }
+
+            }, function (response) {
+                console.log(response);
+            });
+        }
+
         $scope.ExportToExcel = function () {
             var url = '../ApiCategory/ExportExcel';
             window.open(url,'_blank');

@@ -12,6 +12,7 @@ using AccountingWeb.Models.EntityModels;
 using System.IO;
 using ClosedXML.Excel;
 using System.Data;
+using AccountingWeb.Models.CommonModels;
 
 namespace AccountingWeb.ApiController
 {
@@ -24,7 +25,7 @@ namespace AccountingWeb.ApiController
         [Route("GetIndexTable")]
         public async Task<IActionResult> GetIndexTable()
         {
-            string selectMaterialGoods = @"SELECT * FROM [MaterialGoods]";
+            string selectMaterialGoods = @"SELECT * FROM [MaterialGoods] ORDER BY ID Desc";
             using (var con = new SqlConnection(GlobalClass.ConnectionString))
             {
                 await con.OpenAsync();
@@ -83,7 +84,7 @@ namespace AccountingWeb.ApiController
         {
             CategoryEntityModel entity = new CategoryEntityModel()
             {
-                ID = Guid.NewGuid(),
+                ID = SequentialGuid.NewGuid(),
                 MaterialGoodsCode = model.matGoodsCode,
                 MaterialGoodsCategoryID = string.IsNullOrEmpty(model.matGoodsCatId)?Guid.Empty: Guid.Parse(model.matGoodsCatId),
                 MaterialGoodsName = model.matGoodsName,
@@ -138,10 +139,47 @@ namespace AccountingWeb.ApiController
             }
 
         }
-    
-    [HttpGet]
-    [Route("ExportExcel")]
-    public async Task<FileResult> ExportExcel()
+
+        [HttpPost]
+        [Route("DeleteById/{id}")]
+        public async Task<IActionResult> DeleteById(string id)
+        {
+
+            string deleteQuery = @"Delete  [dbo].[MaterialGoods] where [Id]='" + id + "'" + "";
+            using (var con = new SqlConnection(GlobalClass.ConnectionString))
+            {
+                await con.OpenAsync();
+                using (var trn = await con.BeginTransactionAsync())
+                {
+                    try
+                    {
+                        int rowAffect = await con.ExecuteAsync(deleteQuery, null, trn);
+                        await trn.CommitAsync();
+                        if (rowAffect > 0)
+                        {
+                            return Ok(new { ok = true });
+                        }
+                        else
+                        {
+                            return Ok(new { ok = false });
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        await trn.RollbackAsync();
+                        return BadRequest(ex);
+                    }
+                    finally
+                    {
+                        await con.CloseAsync();
+                    }
+                }
+            }
+        }
+
+        [HttpGet]
+        [Route("ExportExcel")]
+         public async Task<FileResult> ExportExcel()
         {
             string selectMaterialGoods = @"SELECT * FROM [MaterialGoods] A
 inner join MaterialGoodsCategory B ON A.MaterialGoodsCategoryID=B.ID
