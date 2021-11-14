@@ -279,5 +279,60 @@ Inner join Repository C On A.RepositoryID=C.ID";
             }
            
         }
+
+        [HttpGet]
+        [Route("GetAllMaterialGoodsCategory")]
+        public async Task<IActionResult> GetAllMaterialGoodsCategory()
+        {
+            string SelectedAllDataQuery = @"SELECT ID as Id, MaterialGoodsCategoryCode as Text FROM [MaterialGoodsCategory] ORDER BY MaterialGoodsCategoryCode";
+            using (var con = new SqlConnection(GlobalClass.ConnectionString))
+            {
+                await con.OpenAsync();
+                try
+                {
+                    var dataList = await con.QueryAsync<DropDownViewModel>(SelectedAllDataQuery);
+
+                    return Ok(new { ok = false, GetAllPaymentClause = dataList.ToList() });
+                }
+                catch (Exception ex)
+                {
+
+                    return BadRequest(ex);
+                }
+                finally
+                {
+                    await con.CloseAsync();
+                }
+            }
+
+        }
+
+
+        [HttpGet]
+        [Route("GetAllRepository")]
+        public async Task<IActionResult> GetAllRepository()
+        {
+            string SelectedAllDataQuery = @"SELECT ID as Id, RepositoryCode as Text FROM [Repository] ORDER BY RepositoryCode";
+            using (var con = new SqlConnection(GlobalClass.ConnectionString))
+            {
+                await con.OpenAsync();
+                try
+                {
+                    var dataList = await con.QueryAsync<DropDownViewModel>(SelectedAllDataQuery);
+
+                    return Ok(new { ok = false, GetAllPaymentClause = dataList.ToList() });
+                }
+                catch (Exception ex)
+                {
+
+                    return BadRequest(ex);
+                }
+                finally
+                {
+                    await con.CloseAsync();
+                }
+            }
+
+        }
     }
 }

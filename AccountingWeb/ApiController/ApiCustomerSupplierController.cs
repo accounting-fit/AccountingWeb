@@ -530,7 +530,7 @@ namespace AccountingWeb.ApiController
         [Route("GetAllAccountingObjectGroup")]
         public  async Task<IActionResult> GetAllAccountingObjectGroup()
         {
-            string SelectedAllDataQuery = @"SELECT ID as Id, AccountingObjectGroupName as Text FROM [AccountingObjectGroup]";
+            string SelectedAllDataQuery = @"SELECT ID as Id, AccountingObjectGroupName as Text FROM [AccountingObjectGroup] ORDER BY AccountingObjectGroupName";
             using (var con = new SqlConnection(GlobalClass.ConnectionString))
             {
                 await con.OpenAsync();
@@ -560,7 +560,7 @@ namespace AccountingWeb.ApiController
         [Route("GetAllPaymentClause")]
         public async Task<IActionResult> GetAllPaymentClause()
         {
-            string SelectedAllDataQuery = @"SELECT ID as Id, PaymentClauseName as Text FROM [PaymentClause]";
+            string SelectedAllDataQuery = @"SELECT ID as Id, PaymentClauseName as Text FROM [PaymentClause] ORDER BY PaymentClauseName";
             using (var con = new SqlConnection(GlobalClass.ConnectionString))
             {
                 await con.OpenAsync();
