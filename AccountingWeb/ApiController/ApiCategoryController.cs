@@ -22,8 +22,8 @@ namespace AccountingWeb.ApiController
     {
 
         [HttpGet]
-        [Route("GetIndexTable")]
-        public async Task<IActionResult> GetIndexTable()
+        [Route("GetAll")]
+        public async Task<IActionResult> GetAll()
         {
             string selectMaterialGoods = @"SELECT * FROM [MaterialGoods] ORDER BY ID Desc";
             using (var con = new SqlConnection(GlobalClass.ConnectionString))
@@ -48,36 +48,6 @@ namespace AccountingWeb.ApiController
 
         }
 
-
-        [HttpGet]
-        [Route("GetInititalData")]
-        public async Task<IActionResult> GetInititalData()
-        {
-            string selectMaterialGoodsCategory = @"select * from [MaterialGoodsCategory]";
-            string selectRepository = @"select * from [Repository]";
-            using (var con = new SqlConnection(GlobalClass.ConnectionString))
-            {
-                await con.OpenAsync();
-                try
-                {
-                    var materialGoodsCategoryData = await con.QueryAsync<MaterialGoodsCategoryEntityModel>(selectMaterialGoodsCategory);
-
-                    var repositoryData = await con.QueryAsync<RepositoryEntityModel>(selectRepository);
-                    return Ok(new { ok = false, materialGoodsCategoryList = materialGoodsCategoryData.ToList(), repositoryList= repositoryData.ToList() });
-                }
-                catch (Exception ex)
-                {
-                   
-                    return BadRequest(ex);
-                }
-                finally
-                {
-                    await con.CloseAsync();
-                }
-            }
-
-        }
-
         [HttpPost]
         [Route("SaveCategory")]
         public async Task<IActionResult> SaveCategory(CategoryViewModel model)
@@ -91,7 +61,7 @@ namespace AccountingWeb.ApiController
                 Unit = model.unit,
                 PurchasePrice = string.IsNullOrEmpty(model.purchasePrice) ? 0 : decimal.Parse(model.purchasePrice),
                 SalePrice = string.IsNullOrEmpty(model.salesPrice) ? 0 : decimal.Parse(model.salesPrice),
-                RepositoryID = string.IsNullOrEmpty(model.repositoryId) ? Guid.Empty : Guid.Parse(model.repositoryId),
+                RepositoryID = model.repositoryId,
                 ReponsitoryAccount = model.repositoryAccountId,
                 ExpenseAccount = model.expanceAccountId,
                 RevenueAccount = model.revenueAccountId,
@@ -100,7 +70,7 @@ namespace AccountingWeb.ApiController
                 ItemSource = model.itemSource,
                 SaleDiscountRate = string.IsNullOrEmpty(model.salesDiscountRate) ? 0 : decimal.Parse(model.salesDiscountRate),
                 PurchaseDiscountRate = string.IsNullOrEmpty(model.purchaseDiscountRate) ? 0 : decimal.Parse(model.purchaseDiscountRate),
-                IsSaleDiscountPolicy = model.NhomisSalesDiscountPolicy,
+                IsSaleDiscountPolicy = model.isSalesDiscountPolicy,
                 IsActive = true,
                 WarrantyTime = model.warrantyTime
             };
@@ -116,6 +86,135 @@ namespace AccountingWeb.ApiController
                     try
                     {
                         int rowAffect = await con.ExecuteAsync(inserQuery, entity, trn);
+                        await trn.CommitAsync();
+                        if (rowAffect > 0)
+                        {
+                            return Ok(new { ok = true });
+                        }
+                        else
+                        {
+                            return Ok(new { ok = false });
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        await trn.RollbackAsync();
+                        return BadRequest(ex);
+                    }
+                    finally
+                    {
+                        await con.CloseAsync();
+                    }
+                }
+            }
+
+        }
+
+        [HttpGet]
+        [Route("GetById/{id}")]
+        public async Task<IActionResult> GetById(string id)
+        {
+            string selectedData = @"select * from [MaterialGoods] where id='" + id + "'" + "";
+            using (var con = new SqlConnection(GlobalClass.ConnectionString))
+            {
+                await con.OpenAsync();
+                try
+                {
+                    var dataList = await con.QueryAsync<CategoryEntityModel>(selectedData);
+                    var singleData = dataList.FirstOrDefault();
+
+                    CategoryViewModel entity = new CategoryViewModel()
+                    {
+                        id= singleData.ID,
+                        matGoodsCode = singleData.MaterialGoodsCode,
+                        matGoodsName = singleData.MaterialGoodsName,
+                        matGoodsCatId = singleData.MaterialGoodsCategoryID.ToString(),
+                        unit = singleData.Unit,
+                        warrantyTime = singleData.WarrantyTime,
+                        minimumStock = singleData.MinimumStock.ToString(),
+                        purchasePrice = singleData.PurchasePrice.ToString(),
+                        salesPrice = singleData.SalePrice.ToString(),
+                        repositoryId = singleData.RepositoryID,
+                        taxRate = singleData.TaxRate.ToString(),
+                        expanceAccountId = singleData.ExpenseAccount.ToString(),
+                        repositoryAccountId = singleData.ReponsitoryAccount,
+                        purchaseDiscountRate = singleData.PurchaseDiscountRate.ToString(),
+                        revenueAccountId = singleData.RevenueAccount.ToString(),
+                        salesDiscountRate = singleData.SaleDiscountRate.ToString(),
+                        isSalesDiscountPolicy = singleData.IsSaleDiscountPolicy,
+                        itemSource = singleData.ItemSource,
+                        isActive = singleData.IsActive
+                    };
+                    return Ok(new { ok = false, SingleData = entity });
+                }
+                catch (Exception ex)
+                {
+
+                    return BadRequest(ex);
+                }
+                finally
+                {
+                    await con.CloseAsync();
+                }
+            }
+
+        }
+
+        [HttpPost]
+        [Route("Update")]
+        public async Task<IActionResult> Update(CategoryViewModel model)
+        {
+            CategoryEntityModel entity = new CategoryEntityModel()
+            {
+                ID=model.id,
+                MaterialGoodsCode = model.matGoodsCode,
+                MaterialGoodsCategoryID = string.IsNullOrEmpty(model.matGoodsCatId) ? Guid.Empty : Guid.Parse(model.matGoodsCatId),
+                MaterialGoodsName = model.matGoodsName,
+                Unit = model.unit,
+                PurchasePrice = string.IsNullOrEmpty(model.purchasePrice) ? 0 : decimal.Parse(model.purchasePrice),
+                SalePrice = string.IsNullOrEmpty(model.salesPrice) ? 0 : decimal.Parse(model.salesPrice),
+                RepositoryID = model.repositoryId,
+                ReponsitoryAccount = model.repositoryAccountId,
+                ExpenseAccount = model.expanceAccountId,
+                RevenueAccount = model.revenueAccountId,
+                MinimumStock = string.IsNullOrEmpty(model.minimumStock) ? 0 : decimal.Parse(model.minimumStock),
+                TaxRate = string.IsNullOrEmpty(model.taxRate) ? 0 : decimal.Parse(model.taxRate),
+                ItemSource = model.itemSource,
+                SaleDiscountRate = string.IsNullOrEmpty(model.salesDiscountRate) ? 0 : decimal.Parse(model.salesDiscountRate),
+                PurchaseDiscountRate = string.IsNullOrEmpty(model.purchaseDiscountRate) ? 0 : decimal.Parse(model.purchaseDiscountRate),
+                IsSaleDiscountPolicy = model.isSalesDiscountPolicy,
+                IsActive = model.isActive,
+                WarrantyTime = model.warrantyTime
+            };
+
+            string updateQuery = @"UPDATE  [dbo].[MaterialGoods]
+                                SET [MaterialGoodsCode]=@MaterialGoodsCode,
+                                    [MaterialGoodsCategoryID]=@MaterialGoodsCategoryID,
+                                    [MaterialGoodsName]=@MaterialGoodsName,
+                                    [Unit]=@Unit,
+                                    [PurchasePrice]=@PurchasePrice,
+                                    [SalePrice]=@SalePrice,
+                                    [RepositoryID]=@RepositoryID,
+                                    [ReponsitoryAccount]=@ReponsitoryAccount,
+                                    [ExpenseAccount]=@ExpenseAccount,
+                                    [RevenueAccount]=@RevenueAccount,
+                                    [MinimumStock]=@MinimumStock,
+                                    [TaxRate]=@TaxRate,
+                                    [ItemSource]=@PurchasePrice,
+                                    [SaleDiscountRate]=@SaleDiscountRate,
+                                    [PurchaseDiscountRate]=@PurchaseDiscountRate,
+                                    [IsSaleDiscountPolicy]=@IsSaleDiscountPolicy,
+                                    [IsActive]=@IsActive ,
+                                    [WarrantyTime]=@WarrantyTime
+                                     where id=@ID";
+            using (var con = new SqlConnection(GlobalClass.ConnectionString))
+            {
+                await con.OpenAsync();
+                using (var trn = await con.BeginTransactionAsync())
+                {
+                    try
+                    {
+                        int rowAffect = await con.ExecuteAsync(updateQuery, entity, trn);
                         await trn.CommitAsync();
                         if (rowAffect > 0)
                         {
@@ -292,7 +391,7 @@ Inner join Repository C On A.RepositoryID=C.ID";
                 {
                     var dataList = await con.QueryAsync<DropDownViewModel>(SelectedAllDataQuery);
 
-                    return Ok(new { ok = false, GetAllPaymentClause = dataList.ToList() });
+                    return Ok(new { ok = false, GetAllMaterialGoodsCategory = dataList.ToList() });
                 }
                 catch (Exception ex)
                 {
@@ -320,7 +419,7 @@ Inner join Repository C On A.RepositoryID=C.ID";
                 {
                     var dataList = await con.QueryAsync<DropDownViewModel>(SelectedAllDataQuery);
 
-                    return Ok(new { ok = false, GetAllPaymentClause = dataList.ToList() });
+                    return Ok(new { ok = false, GetAllRepository = dataList.ToList() });
                 }
                 catch (Exception ex)
                 {

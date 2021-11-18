@@ -28,21 +28,21 @@
                 <div class="p-2">
                     <div class="row">
                         <div class="col-6 mb-2">
-                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="repositoryCode">Repository Code (A)<span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
-                            <input ng-model="model.repositoryCode" placeholder="" type="text" class="form-control form-control-sm" id="repositoryCode" name="repositoryCode" required />
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="repositoryCode">Repository Code<span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
+                            <input ng-model="model.repositoryCode" placeholder="" type="text" class="form-control form-control-sm" id="repositoryCode" name="repositoryCode" required disabled />
                             <span ng-show="frm.repositoryCode.$touched && frm.repositoryCode.$invalid" style="color:red">Repository Code is required.</span>
                         </div>
                         <div class="col-6 mb-2">
-                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="repositoryName">Repository Name (B)<span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="repositoryName">Repository Name)<span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
                             <input ng-model="model.repositoryName" placeholder="" type="text" class="form-control form-control-sm" id="repositoryName" name="repositoryName" required />
                             <span ng-show="frm.repositoryName.$touched && frm.repositoryName.$invalid" style="color:red">Repository Name is required.</span>
                         </div>
                         <div class="col-6 mb-2">
-                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="repositoryName">Description (C)</label>
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="repositoryName">Description</label>
                             <input ng-model="model.description" placeholder="" type="text" class="form-control form-control-sm" id="description" />
                         </div>
                         <div class="col-6 mb-2">
-                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="defaultAccount">Default Account (D)<span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="defaultAccount">Default Account<span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
                             <select ng-model="model.defaultAccount" class="form-control form-control-sm" id="defaultAccount" name="defaultAccount" required>                               
                                 <option value="152">152</option>
                                 <option value="153">153</option>

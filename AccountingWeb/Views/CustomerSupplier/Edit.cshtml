@@ -30,7 +30,7 @@
                     <div class="row" id="firstDiv">
                         <div class="col-6 mb-2">
                             <label class="control-label text-sm-left text-dark font-weight-bolder" for="scaleType">Scale Type (Y) <span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
-                            <select ng-model="model.scaleType" ng-change="divShowHide()" class="form-control form-control-sm" id="scaleType" name="scaleType" required>
+                            <select ng-model="model.scaleType" ng-change="divShowHide()" class="form-control form-control-sm" id="scaleType" name="scaleType" required disabled>
                                 <option value="1">individual</option>
                                 <option value="0">organization</option>
                             </select>
@@ -58,7 +58,7 @@
 
                         <div class="col-4 mb-2">
                             <label class="control-label text-sm-left text-dark font-weight-bolder" for="accountingObjectCode">Accounting Object Code (1) <span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
-                            <input ng-model="model.accountingObjectCode" placeholder="" type="text" class="form-control form-control-sm" id="accountingObjectCode" name="accountingObjectCode" required />
+                            <input ng-model="model.accountingObjectCode" placeholder="" type="text" class="form-control form-control-sm" id="accountingObjectCode" name="accountingObjectCode" required disabled />
                             <span ng-show="frm.accountingObjectCode.$touched && frm.accountingObjectCode.$invalid" style="color:red">Accounting Object Code is required.</span>
                         </div>
                         <div class="col-8 mb-2">

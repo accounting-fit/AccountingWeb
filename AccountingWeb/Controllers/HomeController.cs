@@ -31,7 +31,7 @@ namespace AccountingWeb.Controllers
         }
         public IActionResult CategoryCreate()
         {
-            ViewData["Action"] = "Thong tin VTHH";
+            ViewData["Action"] = "Create Category";
             return View();
         }
 

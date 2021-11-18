@@ -25,7 +25,7 @@ namespace AccountingWeb.Models.EntityModels
         public decimal SalePriceAfterTax2 { get; set; }
         public decimal SalePriceAfterTax3 { get; set; }
         public bool IsSalePriceAfterTax { get; set; }
-        public Guid RepositoryID { get; set; }
+        public Guid? RepositoryID { get; set; }
         public string ReponsitoryAccount { get; set; }
         public string ExpenseAccount { get; set; }
         public string RevenueAccount { get; set; }
@@ -57,5 +57,6 @@ namespace AccountingWeb.Models.EntityModels
         public int AllocationType { get; set; }
         public string AllocationAwaitAccount { get; set; }
         public Guid CareerGroupID { get; set; }
+       
     }
 }
