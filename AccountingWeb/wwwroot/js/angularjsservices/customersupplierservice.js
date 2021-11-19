@@ -47,8 +47,8 @@
         };
 
         var scaleTypeList = [
-                                  { id: "0", text: "individual" }
-                                , { id: "1", text: "organization" }
+                                  { id: "1", text: "individual" }
+                                , { id: "0", text: "organization" }
                              ]
         $scope.scaleTypeList = scaleTypeList;
 
@@ -60,6 +60,12 @@
                              ]
 
         $scope.objectTypeList = objectTypeList;
+
+        var genderList = [
+            { id: "0", text: "Male" }
+          , { id: "1", text: "Female" }
+        ]
+        $scope.genderList = genderList;
 
 
         $scope.AllClear = function () {

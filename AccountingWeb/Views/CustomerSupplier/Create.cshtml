@@ -146,9 +146,8 @@
                         <div class="col-4 mb-2">
                             <label class="control-label text-sm-left text-dark font-weight-bolder" for="contactSex">Contact Sex</label>
                             <select ng-model="model.contactSex" id="contactSex" class="form-control form-control-sm" style="width: 100% !important;">
-                                <option value="0">Male</option>
-                                <option value="1">Female</option>
-                            </select>
+                                <option ng-repeat="item in genderList" value="{{item.id}}">{{item.text}}</option>
+                             </select>
                         </div>
 
 
