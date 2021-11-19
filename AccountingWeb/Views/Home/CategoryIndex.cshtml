@@ -129,9 +129,11 @@
                         <th>Material Goods Name</th>
                         <th>Tin Chat VTH</th>
                         <th>Unit</th>
-                        <th>Minimum Stock</th>
-                        <th>Gia tri ton</th>
-                        <th>Trinh tang</th>
+                        <th>Stock</th>
+                        <th>Stock Value</th>
+                        <th>
+                            Is Active?
+                        </th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -153,10 +155,10 @@
                             <span class="table-data-font">{{item.minimumStock}}</span>
                         </td>
                         <td>
-                            <span class="table-data-font">Gia tri ton</span>
+                            <span class="table-data-font">Stock Value</span>
                         </td>
                         <td>
-                            <span class="table-data-font">Trinh tang</span>
+                            <span class="table-data-font">{{item.isActive==true?1:0}}</span><br />
                         </td>
 
                         <td>

@@ -23,12 +23,12 @@
         };
 
         var customList = [
-                                 { id: "1", text: "Vat tu hang hoa" }
-                                ,{ id: "2", text: "VTHH lap rap/thao do" }
-                                ,{ id: "3", text: "Dich vu" }
-                                ,{ id: "4", text: "Thanh pham" }
-                                ,{ id: "5", text: "Chi la dien giai" }
-                                ,{ id: "6", text: "Khac" }
+            { id: "1", text: "Goods, supplies" }
+            , { id: "2", text: "Pieces of goods, suppliers" }
+            , { id: "3", text: "Service" }
+            , { id: "4", text: "Finished product" }
+            , { id: "5", text: "Just an interpretation" }
+            , { id: "6", text: "Other" }
                          ]
 
         $scope.customCodeList = customList;
@@ -39,40 +39,53 @@
 
         $scope.repositoryList = [];
         var taxList = [
-                         { id: "10", text: "10%" }
-                        ,{ id: "20", text: "20%" }
-                        ,{ id: "30", text: "30%" }
-                        ,{ id: "40", text: "40%" }
+             { id: "0", text: "0%" }
+            ,{ id: "5", text: "5%" }
+            ,{ id: "10", text: "10%" }
+            ,{ id: "-1", text: "No Tax" }
+            ,{ id: "-2", text: "Uncalculated tax" }
                       ]
         $scope.taxRateList = taxList;
         var expanceAccountList = [
-                                 { id: "551", text:"551" }
-                                ,{ id: "552", text: "552" }
-                                ,{ id: "553", text:"553" }
-                                ,{ id: "554", text: "554" }                                
+            { id: "154", text:"154" }
+            , { id: "2411", text: "2411" }
+            , { id: "2412", text:"2412" }
+            , { id: "2413", text: "2413" }
+            , { id: "631", text: "631" }
+            , { id: "632", text: "632" }
+            , { id: "6421", text: "6421" }
+            , { id: "6422", text: "6422" }
                            ]
         $scope.expanceAccountList = expanceAccountList;
         var repositoryAccountList = [
-                                        { id: "551", text:"551" }
-                                       ,{ id: "552", text:"552" }
-                                       ,{ id: "553", text:"553" }
-                                       ,{ id: "554", text:"554" }
+            { id: "551", text:"551" }
+            ,{ id: "552", text:"552" }
+            ,{ id: "553", text:"553" }
+            , { id: "554", text: "554" }
+            , { id: "557", text: "557" }
+            , { id: "558", text: "558" }
+            , { id: "557", text: "557" }
                                  ]
         $scope.repositoryAccountList = repositoryAccountList;
 
         var revenueAccountList = [
-                                      { id: "5511", text:"5511" }
-                                    , { id: "5522", text:"5522" }
-                                    , { id: "5533", text:"5533" }
-                                    , { id: "5544", text:"5544" }
+                { id: "5111", text:"5111" }
+            , { id: "5112", text:"5112" }
+            , { id: "5113", text:"5113" }
+            , { id: "5118", text: "5118" }
+            , { id: "515", text: "515" }
                           ]
         $scope.revenueAccountList = revenueAccountList;
 
         var NhomList = [
-                             { id: "551", text:"551" }
-                            ,{ id: "552", text:"552" }
-                            ,{ id: "553", text:"553" }
-                            ,{ id: "554", text:"554" }
+              { id: "1", text:"1" }
+            , { id: "101", text:"101" }
+            , { id: "102", text:"102" }
+            , { id: "1021", text: "1021" }
+            , { id: "1022", text: "1022" }
+            , { id: "103", text: "103" }
+            , { id: "104", text: "104" }
+            , { id: "1042", text: "1042" }
         ]
         $scope.NhomList = NhomList;
 

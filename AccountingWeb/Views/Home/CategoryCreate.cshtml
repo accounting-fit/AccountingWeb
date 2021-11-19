@@ -18,36 +18,36 @@
     <form name="frm">
         <div class="card-body">
             <div class="shadow rounded">
-                <div class="title text-center w-100 pt-2 text-dark font-weight-bolder">Category</div>
+                <div class="title text-center w-100 pt-2 text-dark font-weight-bolder">Summary Information</div>
                 <hr class="border-bottom-light mb-0" />
                 <div class="p-2">
                     <div class="row">
                         <div class="col-6 mb-2">
-                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="matGoodsCode">Material Goods Code<span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
-                            <input ng-model="model.matGoodsCode" placeholder="" required type="text" class="form-control form-control-sm" id="matGoodsCode" name="matGoodsCode" />
-                            <span ng-show="frm.matGoodsCode.$touched && frm.matGoodsCode.$invalid" style="color:red">Material Goods Code is required.</span>
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="matGoodsCode">Goods Code<span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
+                            <input ng-model="model.matGoodsCode" placeholder="Goods Code" required type="text" class="form-control form-control-sm" id="matGoodsCode" name="matGoodsCode" />
+                            <span ng-show="frm.matGoodsCode.$touched && frm.matGoodsCode.$invalid" style="color:red">Goods Code is required.</span>
                         </div>
                         <div class="col-6 mb-2">
-                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="matGoodsName">Material Goods Name<span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
-                            <input ng-model="model.matGoodsName" placeholder="" required type="text" class="form-control form-control-sm" id="matGoodsName" name="matGoodsName" />
-                            <span ng-show="frm.matGoodsName.$touched && frm.matGoodsName.$invalid" style="color:red">Material Goods Name is required.</span>
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="matGoodsName">Goods Name<span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
+                            <input ng-model="model.matGoodsName" placeholder="Goods Name" required type="text" class="form-control form-control-sm" id="matGoodsName" name="matGoodsName" />
+                            <span ng-show="frm.matGoodsName.$touched && frm.matGoodsName.$invalid" style="color:red">Goods Name is required.</span>
                         </div>
                         <div class="col-6 mb-2">
-                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="customCode">Customer Code<span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="customCode">Property<span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
                             <select ng-model="model.customCode" class="form-control form-control-sm" id="customCode" name="customCode" required>
                                 <option ng-repeat="item in customCodeList" value="{{item.id}}">{{item.text}}</option>
                             </select>
-                            <span ng-show="frm.customCode.$touched && frm.customCode.$invalid" style="color:red">Custom Code is required.</span>
+                            <span ng-show="frm.customCode.$touched && frm.customCode.$invalid" style="color:red">Property is required.</span>
                         </div>
                         <div class="col-6 mb-2">
-                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="matGoodsCatId">Material Goods Category</label>
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="matGoodsCatId">Type</label>
                             <select ng-model="model.matGoodsCatId" class="form-control form-control-sm" id="matGoodsCatId" name="matGoodsCatId">
                                 <option ng-repeat="item in GetAllMaterialGoodsCategory" value="{{item.id}}">{{item.text}}</option>
                             </select>
                         </div>
                         <div class="col-6 mb-2">
                             <label class="control-label text-sm-left text-dark font-weight-bolder" for="unit">Unit</label>
-                            <input ng-model="model.unit" placeholder="" type="text" class="form-control form-control-sm" id="unit" name="unit" />
+                            <input ng-model="model.unit" placeholder="Unit" type="text" class="form-control form-control-sm" id="unit" name="unit" />
                         </div>
                         <div class="col-6 mb-2">
                             <label class="control-label text-sm-left text-dark font-weight-bolder" for="warrantyTime">Warranty Time</label>
@@ -58,7 +58,7 @@
                         <div class="col-6 mb-2"></div>
                         <div class="col-6 mb-2">
                             <label class="control-label text-sm-left text-dark font-weight-bolder" for="minimumStock">Minimum Stock</label>
-                            <input ng-model="model.minimumStock" placeholder="" type="text" class="form-control form-control-sm" id="minimumStock" name="minimumStock" ng-pattern="/^\d{0,100}.{0,1}\d{0,10}?$/" />
+                            <input ng-model="model.minimumStock" placeholder="Minimum Stock" type="text" class="form-control form-control-sm" id="minimumStock" name="minimumStock" ng-pattern="/^\d{0,100}.{0,1}\d{0,10}?$/" />
                             <span ng-show="frm.minimumStock.$touched && frm.minimumStock.$invalid" style="color:red">Please provide number/decimal only</span>
                         </div>
                     </div>
@@ -66,19 +66,19 @@
             </div>
 
             <div class="shadow rounded mt-2">
-                <div class="title text-center w-100 pt-2 text-dark font-weight-bolder">Category Info</div>
+                <div class="title text-center w-100 pt-2 text-dark font-weight-bolder">Default Information</div>
                 <hr class="border-bottom-light mb-0" />
                 <div class="p-2">
                     <div class="row">
                         <div class="col-6 mb-2">
                             <label class="control-label text-sm-left text-dark font-weight-bolder" for="purchasePrice">Purchase Price</label>
-                            <input ng-model="model.purchasePrice" placeholder="" type="text" class="form-control form-control-sm" id="purchasePrice" name="purchasePrice" ng-pattern="/^\d{0,100}.{0,1}\d{0,10}?$/" />
+                            <input ng-model="model.purchasePrice" placeholder="Purchase unit price" type="text" class="form-control form-control-sm" id="purchasePrice" name="purchasePrice" ng-pattern="/^\d{0,100}.{0,1}\d{0,10}?$/" />
                             <span ng-show="frm.purchasePrice.$touched && frm.purchasePrice.$invalid" style="color:red">Please provide number/decimal only</span>
                         </div>
                         <div class="col-6 mb-2">
-                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="salesPrice">Sales Price</label>
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="salesPrice">Sale Price</label>
                             <div class="input-group">
-                                <input ng-model="model.salesPrice" placeholder="" type="text" class="form-control form-control-sm" id="salesPrice" name="salesPrice" ng-pattern="/^\d{0,100}.{0,1}\d{0,10}?$/" />
+                                <input ng-model="model.salesPrice" placeholder="Sale unit price" type="text" class="form-control form-control-sm" id="salesPrice" name="salesPrice" ng-pattern="/^\d{0,100}.{0,1}\d{0,10}?$/" />
                                 <span ng-show="frm.salesPrice.$touched && frm.salesPrice.$invalid" style="color:red">Please provide number/decimal only</span>
                                 <div class="input-group-append">
                                     <button class="btn btn-sm btn-primary"><i class="fas fa-ellipsis-h"></i></button>
@@ -99,13 +99,13 @@
 
                         </div>
                         <div class="col-6 mb-2">
-                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="taxRate">Tax Rate</label>
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="taxRate">Tax Rate(%)</label>
                             <select ng-model="model.taxRate" class="form-control form-control-sm" id="taxRate" name="taxRate">
                                 <option ng-repeat="item in taxRateList" value="{{item.id}}">{{item.text}}</option>
                             </select>
                         </div>
                         <div class="col-6 mb-2">
-                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="expanceAccount">Expance Account</label>
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="expanceAccount">Expance Accounting</label>
                             <select ng-model="model.expanceAccountId" class="form-control form-control-sm" id="expanceAccount" name="expanceAccount">
                                 <option ng-repeat="item in expanceAccountList" value="{{item.id}}">{{item.text}}</option>
                             </select>
@@ -117,7 +117,7 @@
                             </select>
                         </div>
                         <div class="col-6 mb-2">
-                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="purchaseDiscountRate">Purchase Discount Rate(%)</label>
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="purchaseDiscountRate">Purchase discount rate(%)</label>
                             <input ng-model="model.purchaseDiscountRate" placeholder="" type="text" class="form-control form-control-sm" id="purchaseDiscountRate" name="purchaseDiscountRate" ng-pattern="/^\d{0,100}.{0,1}\d{0,10}?$/" />
                             <span ng-show="frm.purchaseDiscountRate.$touched && frm.purchaseDiscountRate.$invalid" style="color:red">Please provide number/decimal only</span>
                         </div>
@@ -128,16 +128,17 @@
                             </select>
                         </div>
                         <div class="col-6 mb-2">
-                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="Nhom">Nhom</label>
-                            <select ng-model="model.Nhom" class="form-control form-control-sm" name="Nhom">
-                                <option ng-repeat="item in NhomList" value="{{item.id}}">{{item.text}}</option>
-                            </select>
-                        </div>
-                        <div class="col-6 mb-2">
                             <label class="control-label text-sm-left text-dark font-weight-bolder" for="salesDiscountRate">Sales Discount Rate(%)</label>
                             <input ng-model="model.salesDiscountRate" placeholder="" type="text" class="form-control form-control-sm" id="salesDiscountRate" name="salesDiscountRate" ng-pattern="/^\d{0,100}.{0,1}\d{0,10}?$/" />
                             <span ng-show="frm.salesDiscountRate.$touched && frm.salesDiscountRate.$invalid" style="color:red">Please provide number/decimal only</span>
                         </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="Nhom">Service goods with special tax</label>
+                            <select ng-model="model.Nhom" class="form-control form-control-sm" name="Nhom">
+                                <option ng-repeat="item in NhomList" value="{{item.id}}">{{item.text}}</option>
+                            </select>
+                        </div>
+
 
                         <div class="col-6 mb-2"></div>
                         <div class="col-6 mb-2">
@@ -145,7 +146,7 @@
                                 <div class="col-10">
                                     <div class="custom-control custom-checkbox">
                                         <input ng-model="model.isSalesDiscountPolicy" type="checkbox" class="custom-control-input" id="isSalesDiscountPolicy" name="isSalesDiscountPolicy">
-                                        <label class="custom-control-label text-dark" for="isSalesDiscountPolicy">Is Sales Discount Policy</label>
+                                        <label class="custom-control-label text-dark" for="isSalesDiscountPolicy">Sales Discount Policy</label>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -155,14 +156,18 @@
                         </div>
                         <div class="col-12 mb-2">
                             <label class="control-label text-sm-left text-dark font-weight-bolder" for="itemSource">Item Source</label>
-                            <input ng-model="model.itemSource" placeholder="" type="text" class="form-control form-control-sm" id="itemSource" name="itemSource" />
+                            <input ng-model="model.itemSource" placeholder="Item Source" type="text" class="form-control form-control-sm" id="itemSource" name="itemSource" />
                         </div>
                     </div>
                     <div class="card-footer text-right">
-                        <button type="button" ng-click="Save(1)" ng-disabled="frm.$invalid" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> &nbsp;Save & Exit</button>
                         <button type="button" ng-click="Save(0)" ng-disabled="frm.$invalid" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> &nbsp;Save</button>
+                        <button type="button" ng-click="Save(1)" ng-disabled="frm.$invalid" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> &nbsp;Save & Exit</button>
                         <a href="/Home/CategoryIndex" class="btn btn-sm btn-danger"><i class="fas fa-times-circle"></i> &nbsp;Cancel</a>
                     </div>
+                </div>
+            </div>
+        </div>
+
 </form>
    
 </div>

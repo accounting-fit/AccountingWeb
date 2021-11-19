@@ -47,11 +47,10 @@
                         </div>
 
                     </div>
-
                    
                     <div class="row" id="secondDiv">
                         <div class="col-12 mb-2">
-                            <div class="title text-center w-100 pt-2 text-dark font-weight-bolder">Individual</div>
+                            <div class="title text-center w-100 pt-2 text-dark font-weight-bolder">INDIVIDUAL</div>
                             <hr class="border-bottom-light mb-0" />
                         </div>
 
@@ -134,7 +133,7 @@
                     
                     <div class="row" id="thirdDiv">
                         <div class="col-12 mb-2">
-                            <div class="title text-center w-100 pt-2 text-dark font-weight-bolder">organization</div>
+                            <div class="title text-center w-100 pt-2 text-dark font-weight-bolder">ORGANIZATION</div>
                             <hr class="border-bottom-light mb-0" />
                         </div>
 
@@ -170,14 +169,14 @@
 
 
                         <div class="col-4 mb-2">
-                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="ContactEmail">contact Email</label>
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="ContactEmail">Contact Email</label>
                             <input ng-model="model.contactEmail" placeholder="" type="text" class="form-control form-control-sm" id="contactEmail" name="contactEmail" />
                             <span ng-show="frm.contactEmail.$touched && frm.contactEmail.$invalid" style="color:red">Please provide valid email</span>
                         </div>
 
 
                         <div class="col-4 mb-2">
-                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="contactHomeTel">contact Home Tel</label>
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="contactHomeTel">Contact Home Tel</label>
                             <input ng-model="model.contactHomeTel" placeholder="" type=text class="form-control form-control-sm" id="contactHomeTel" name="contactHomeTel" ng-pattern="/^[0-9]*$/" />
                             <span ng-show="frm.contactHomeTel.$touched && frm.contactHomeTel.$invalid" style="color:red">Please provide number only</span>
                         </div>
@@ -218,8 +217,8 @@
             </div>
         </div>
         <div class="card-footer text-right">
-            <button type="button" ng-click="Save(1)" ng-disabled="frm.$invalid" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> &nbsp;Save & Exit</button>
             <button type="button" ng-click="Save(0)" ng-disabled="frm.$invalid" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> &nbsp;Save</button>
+            <button type="button" ng-click="Save(1)" ng-disabled="frm.$invalid" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> &nbsp;Save & Exit</button>
             <a href="/CustomerSupplier/Index" class="btn btn-sm btn-danger"><i class="fas fa-times-circle"></i> &nbsp;Cancel</a>
         </div>
     </form>
