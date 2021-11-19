@@ -31,7 +31,7 @@ namespace AccountingWeb.ApiController
                 await con.OpenAsync();
                 try
                 {
-                    var categoryEntityModelData = await con.QueryAsync<CategoryEntityModel>(selectMaterialGoods);
+                    var categoryEntityModelData = await con.QueryAsync<CategoryEntityModel>(selectMaterialGoods);                    
 
                     return Ok(new { ok = false, categoryEntityModelList = categoryEntityModelData.ToList()});
                 }
@@ -125,7 +125,7 @@ namespace AccountingWeb.ApiController
 
                     CategoryViewModel entity = new CategoryViewModel()
                     {
-                        id= singleData.ID,
+                        id = singleData.ID,
                         matGoodsCode = singleData.MaterialGoodsCode,
                         matGoodsName = singleData.MaterialGoodsName,
                         matGoodsCatId = singleData.MaterialGoodsCategoryID.ToString(),

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -57,6 +58,13 @@ namespace AccountingWeb.Models.EntityModels
         public int AllocationType { get; set; }
         public string AllocationAwaitAccount { get; set; }
         public Guid CareerGroupID { get; set; }
-       
+
+        [NotMapped]
+        public int? stock { get; set; } = 0;
+        [NotMapped]
+        public int? stockValue { get; set; } = 0;
+        [NotMapped]
+        public string customCode { get; set; } = "B";
+
     }
 }

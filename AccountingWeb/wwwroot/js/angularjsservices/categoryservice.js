@@ -69,7 +69,7 @@
         $scope.repositoryAccountList = repositoryAccountList;
 
         var revenueAccountList = [
-                { id: "5111", text:"5111" }
+             { id: "5111", text:"5111" }
             , { id: "5112", text:"5112" }
             , { id: "5113", text:"5113" }
             , { id: "5118", text: "5118" }

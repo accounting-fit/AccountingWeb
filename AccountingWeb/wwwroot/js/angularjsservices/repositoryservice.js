@@ -8,7 +8,16 @@
                         ,isActive: null
                         ,repositoryCode:null
                         ,repositoryName: null
-                      };
+        };
+
+        var defaultAccountList = [
+              { id: "153", text: "153" }
+            , { id: "154", text: "154" }
+            , { id: "155", text: "155" }
+            , { id: "156", text: "156" }
+            , { id: "157", text: "157" }
+        ]
+        $scope.defaultAccountList = defaultAccountList;
 
         $scope.AllClear = function () {
             $scope.model = {

@@ -45,6 +45,23 @@
                             , tel: null
                             , website: null
         };
+
+        var scaleTypeList = [
+                                  { id: "0", text: "individual" }
+                                , { id: "1", text: "organization" }
+                             ]
+        $scope.scaleTypeList = scaleTypeList;
+
+        var objectTypeList = [
+                                 { id: "0", text: "customer" }
+                                ,{ id: "1", text: "supplier" }
+                                ,{ id: "2", text: "customer/supplier" }
+                                ,{ id: "3", text: "other" }
+                             ]
+
+        $scope.objectTypeList = objectTypeList;
+
+
         $scope.AllClear = function () {
             $scope.model = {
                 accountObjectGroupID: null

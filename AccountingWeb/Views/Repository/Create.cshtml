@@ -44,13 +44,8 @@
                         </div>
                         <div class="col-6 mb-2">
                             <label class="control-label text-sm-left text-dark font-weight-bolder" for="defaultAccount">Default Account <span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
-                            <select ng-model="model.defaultAccount" class="form-control form-control-sm" id="defaultAccount" name="defaultAccount" required>                    
-                                <option value="152">152</option>
-                                <option value="153">153</option>
-                                <option value="154">154</option>
-                                <option value="155">155</option>
-                                <option value="156">156</option>
-                                <option value="157">157</option>
+                            <select ng-model="model.defaultAccount" class="form-control form-control-sm" id="defaultAccount" name="defaultAccount" required>
+                                <option ng-repeat="item in defaultAccountList" value="{{item.id}}">{{item.text}}</option>                               
                             </select>
                             <span ng-show="frm.defaultAccount.$touched && frm.defaultAccount.$invalid" style="color:red">Default Account is required.</span>
                         </div>                      

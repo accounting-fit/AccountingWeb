@@ -30,18 +30,14 @@
                         <div class="col-6 mb-2">
                             <label class="control-label text-sm-left text-dark font-weight-bolder" for="scaleType">Scale Type <span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
                             <select ng-model="model.scaleType" ng-change="divShowHide()" class="form-control form-control-sm" id="scaleType" name="scaleType" required>
-                                <option value="1">individual</option>
-                                <option value="0">organization</option>
+                                <option ng-repeat="item in scaleTypeList" value="{{item.id}}">{{item.text}}</option>
                             </select>
                             <span ng-show="frm.scaleType.$touched && frm.scaleType.$invalid" style="color:red">Scale Type is required.</span>
                         </div>
                         <div class="col-6 mb-2">
                             <label class="control-label text-sm-left text-dark font-weight-bolder" for="objectType">Object Type <span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
                             <select ng-model="model.objectType" class="form-control form-control-sm" id="objectType" name="objectType" required>
-                                <option value="0">customer</option>
-                                <option value="1">supplier</option>
-                                <option value="2">customer/supplier</option>
-                                <option value="3">other</option>
+                                <option ng-repeat="item in objectTypeList" value="{{item.id}}">{{item.text}}</option>
                             </select>
                             <span ng-show="frm.objectType.$touched && frm.objectType.$invalid" style="color:red">Object Type is required.</span>
                         </div>
