@@ -12,7 +12,7 @@ namespace AccountingWeb.Models.EntityModels
         public Guid MaterialGoodsCategoryID { get; set; }
         public string MaterialGoodsCode { get; set; }
         public string MaterialGoodsName { get; set; }
-        public int MaterialGoodsType { get; set; }
+        public int? MaterialGoodsType { get; set; }
         public int MaterialToolType { get; set; }
         public string Unit { get; set; }
         public string ConvertUnit { get; set; }
@@ -64,7 +64,7 @@ namespace AccountingWeb.Models.EntityModels
         [NotMapped]
         public int? stockValue { get; set; } = 0;
         [NotMapped]
-        public string customCode { get; set; } = "B";
+        public string customCode { get; set; }
 
     }
 }

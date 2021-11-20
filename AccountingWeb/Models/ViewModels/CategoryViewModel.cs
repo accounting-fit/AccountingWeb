@@ -28,7 +28,8 @@ namespace AccountingWeb.Models.ViewModels
         public string warrantyTime { get; set; }
         public string unit { get; set; }
         public bool isActive { get; set; }
-      
-       
+        public int? materialGoodsType { get; set; }
+
+
     }
 }

@@ -150,6 +150,10 @@
             });
         } 
 
+
+        $scope.OnInit = function () {
+            $scope.model.scaleType = "1"
+        }
         $scope.Save = function (isClose) {
             debugger;
             var model = $scope.model;    

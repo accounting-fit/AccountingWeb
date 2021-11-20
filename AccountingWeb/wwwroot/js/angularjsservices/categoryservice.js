@@ -4,10 +4,10 @@
         $scope.model = {
             matGoodsCode: "",
             matGoodsName: "",
-            customCode: "1",
+            materialGoodsType:null,
             matGoodsCatId: "",
             unit: "",
-            warrantyTime: "0",
+            warrantyTime: "",
             minimumStock: "",
             purchasePrice: "",
             salesPrice: "",
@@ -18,18 +18,32 @@
             purchaseDiscountRate: "",
             revenueAccountId: "",
             salesDiscountRate: "",
-            NhomisSalesDiscountPolicy: false,
+            isSalesDiscountPolicy: false,
             itemSource: ""
         };
 
         var customList = [
-            { id: "1", text: "Goods, supplies" }
-            , { id: "2", text: "Pieces of goods, suppliers" }
-            , { id: "3", text: "Service" }
-            , { id: "4", text: "Finished product" }
-            , { id: "5", text: "Just an interpretation" }
-            , { id: "6", text: "Other" }
-                         ]
+              { id:"1", text: "Goods, supplies" }
+            , { id:"2", text: "Pieces of goods, suppliers" }
+            , { id:"3", text: "Service" }
+            , { id:"4", text: "Finished product" }
+            , { id:"5", text: "Just an interpretation" }
+            , { id:"6", text: "Other" }
+        ]
+
+        var getCustomName = function (id) {
+
+            var name = "";
+            for (var i = 0; i < customList.length; i++){
+
+                if (customList[i].id == id) {
+                    name = customList[i].text;
+                    break;
+                }
+            }
+            return name;
+
+        }
 
         $scope.customCodeList = customList;
 
@@ -95,10 +109,10 @@
             $scope.model = {
                 matGoodsCode: "",
                 matGoodsName: "",
-                customCode: "1",
+                materialGoodsType: null,
                 matGoodsCatId: "",
                 unit: "",
-                warrantyTime: "0",
+                warrantyTime: "",
                 minimumStock: "",
                 purchasePrice: "",
                 salesPrice: "",
@@ -109,7 +123,7 @@
                 purchaseDiscountRate: "",
                 revenueAccountId: "",
                 salesDiscountRate: "",
-                NhomisSalesDiscountPolicy: false,
+                isSalesDiscountPolicy: false,
                 itemSource: ""
             };
         }
@@ -122,12 +136,16 @@
             var url = '/ApiCategory/GetAll';
             $http({
                 method: 'GET',
-                url: url,               
-            }).then(function (response) {
+                url: url,                    }).then(function (response) {
                 console.log(response);
                 if (response.status === 200) {
                     var data = response.data;
-                    $scope.GetAll = data.categoryEntityModelList;
+                    debugger;
+                    var allData = data.categoryEntityModelList;
+                    for(var i = 0; i < allData.length; i++) {
+                        allData[i].customCode = getCustomName(allData[i].materialGoodsType);
+                    }                   
+                    $scope.GetAll = allData;
                 }
 
             }, function (response) {
@@ -135,7 +153,10 @@
             });
         }
 
-       
+        $scope.OnInit = function () {
+            $scope.model.materialGoodsType="1"
+             $scope.model.warrantyTime="0"
+        }
 
         $scope.Save = function (isClose) {
             
@@ -201,11 +222,11 @@
                 debugger;
                 console.log(response);
                 if (response.status === 200) {
-                    var data = response.data;
+                    var data = response.data;         
                     $scope.model.id = data.singleData.id;
                     $scope.model.matGoodsCode = data.singleData.matGoodsCode;
                     $scope.model.matGoodsName = data.singleData.matGoodsName;
-                    $scope.model.customCode = "1";
+                    $scope.model.materialGoodsType = data.singleData.materialGoodsType.toString();
                     $scope.model.matGoodsCatId = data.singleData.matGoodsCatId;
                     $scope.model.unit = data.singleData.unit;
                     $scope.model.warrantyTime = data.singleData.warrantyTime;

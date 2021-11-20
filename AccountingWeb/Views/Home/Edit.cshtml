@@ -23,7 +23,7 @@
                 <hr class="border-bottom-light mb-0" />
                 <div class="p-2">
                     <div class="row">
-                        <input ng-model="model.id"  hidden/>
+                        <input ng-model="model.id" hidden />
                         <div class="col-6 mb-2">
                             <label class="control-label text-sm-left text-dark font-weight-bolder" for="matGoodsCode">Goods Code<span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
                             <input ng-model="model.matGoodsCode" placeholder="Goods Code" required type="text" class="form-control form-control-sm" id="matGoodsCode" name="matGoodsCode" disabled />
@@ -36,10 +36,10 @@
                         </div>
                         <div class="col-6 mb-2">
                             <label class="control-label text-sm-left text-dark font-weight-bolder" for="customCode">Property<span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
-                            <select ng-model="model.customCode" class="form-control form-control-sm" id="customCode" name="customCode" required>
+                            <select ng-model="model.materialGoodsType" class="form-control form-control-sm" id="materialGoodsType" name="materialGoodsType" required>
                                 <option ng-repeat="item in customCodeList" value="{{item.id}}">{{item.text}}</option>
                             </select>
-                            <span ng-show="frm.customCode.$touched && frm.customCode.$invalid" style="color:red">Property is required.</span>
+                            <span ng-show="frm.materialGoodsType.$touched && frm.materialGoodsType.$invalid" style="color:red">Property is required.</span>
                         </div>
                         <div class="col-6 mb-2">
                             <label class="control-label text-sm-left text-dark font-weight-bolder" for="matGoodsCatId">Type</label>
@@ -164,14 +164,22 @@
                             <label class="control-label text-sm-left text-dark font-weight-bolder" for="IsActive">Active</label>
                         </div>
                         <div class="col-1 mb-2">
-                            <input ng-model="model.isActive"  type="checkbox" class="form-control form-control-sm" id="isActive" style="width:35%" />
+                            <input ng-model="model.isActive" type="checkbox" class="form-control form-control-sm" id="isActive" style="width:35%" />
                         </div>
                     </div>
                     <div class="card-footer text-right">
                         <button type="button" ng-click="Update(1)" ng-disabled="frm.$invalid" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> &nbsp;Update & Exit</button>
                         <a href="/Home/CategoryIndex" class="btn btn-sm btn-danger"><i class="fas fa-times-circle"></i> &nbsp;Cancel</a>
                     </div>
-    </form>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+</form>
 
 </div>
 @section Scripts{

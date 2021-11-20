@@ -58,6 +58,7 @@ namespace AccountingWeb.ApiController
                 MaterialGoodsCode = model.matGoodsCode,
                 MaterialGoodsCategoryID = string.IsNullOrEmpty(model.matGoodsCatId)?Guid.Empty: Guid.Parse(model.matGoodsCatId),
                 MaterialGoodsName = model.matGoodsName,
+                MaterialGoodsType =model.materialGoodsType,
                 Unit = model.unit,
                 PurchasePrice = string.IsNullOrEmpty(model.purchasePrice) ? 0 : decimal.Parse(model.purchasePrice),
                 SalePrice = string.IsNullOrEmpty(model.salesPrice) ? 0 : decimal.Parse(model.salesPrice),
@@ -143,7 +144,8 @@ namespace AccountingWeb.ApiController
                         salesDiscountRate = singleData.SaleDiscountRate.ToString(),
                         isSalesDiscountPolicy = singleData.IsSaleDiscountPolicy,
                         itemSource = singleData.ItemSource,
-                        isActive = singleData.IsActive
+                        isActive = singleData.IsActive,
+                        materialGoodsType=singleData.MaterialGoodsType
                     };
                     return Ok(new { ok = false, SingleData = entity });
                 }
@@ -170,6 +172,7 @@ namespace AccountingWeb.ApiController
                 MaterialGoodsCode = model.matGoodsCode,
                 MaterialGoodsCategoryID = string.IsNullOrEmpty(model.matGoodsCatId) ? Guid.Empty : Guid.Parse(model.matGoodsCatId),
                 MaterialGoodsName = model.matGoodsName,
+                MaterialGoodsType=model.materialGoodsType,
                 Unit = model.unit,
                 PurchasePrice = string.IsNullOrEmpty(model.purchasePrice) ? 0 : decimal.Parse(model.purchasePrice),
                 SalePrice = string.IsNullOrEmpty(model.salesPrice) ? 0 : decimal.Parse(model.salesPrice),
@@ -191,6 +194,7 @@ namespace AccountingWeb.ApiController
                                 SET [MaterialGoodsCode]=@MaterialGoodsCode,
                                     [MaterialGoodsCategoryID]=@MaterialGoodsCategoryID,
                                     [MaterialGoodsName]=@MaterialGoodsName,
+                                    [MaterialGoodsType]=@MaterialGoodsType,
                                     [Unit]=@Unit,
                                     [PurchasePrice]=@PurchasePrice,
                                     [SalePrice]=@SalePrice,
@@ -331,7 +335,7 @@ Inner join Repository C On A.RepositoryID=C.ID";
                          */
                             worksheet.Cell(currentRow, 1).Value = row["MaterialGoodsCode"].ToString();
                             worksheet.Cell(currentRow, 2).Value = row["MaterialGoodsName"].ToString();
-                            worksheet.Cell(currentRow, 3).Value = "Custome Code";
+                            worksheet.Cell(currentRow, 3).Value = row["MaterialGoodsType"].ToString();
                             worksheet.Cell(currentRow, 4).Value = row["MaterialGoodsCategoryCode"].ToString();
                             worksheet.Cell(currentRow, 5).Value = row["Unit"].ToString();
                             worksheet.Cell(currentRow, 6).Value = row["WarrantyTime"].ToString();
