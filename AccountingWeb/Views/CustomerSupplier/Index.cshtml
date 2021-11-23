@@ -117,7 +117,7 @@
                 </div>
             </div>
             <div class="col-6 pr-3 pl-3 text-right">
-                <a href="/CustomerSupplier/Create" class="text-white btn bg-gradient-info btn-xs btn-filter mr-2" type="button"><i class="fas fa-save"></i>&nbsp;Add</a> 
+                <a href="/CustomerSupplier/Create" class="text-white btn bg-gradient-info btn-xs btn-filter mr-2" type="button"><i class="fas fa-plus-circle"></i>&nbsp;Add</a> 
                 <button title="Export To Excel" ng-click="ExportToExcel()" class="text-white btn bg-gradient-primary btn-xs btn-filter" type="button"><i class="fas fa-file-excel"></i>&nbsp;Export</button>
             </div>
         </div>
@@ -154,6 +154,7 @@
                         <td>
                             <a href="/CustomerSupplier/Edit/{{item.id}}" class="text-white btn bg-gradient-success btn-xs btn-filter mr-2" type="button"><i class="fas fa-edit"></i>&nbsp;Edit</a>
                             <a href="/CustomerSupplier/Delete/{{item.id}}" class="text-white btn bg-gradient-danger btn-xs btn-filter mr-2" type="button"><i class="fas fa-trash"></i>&nbsp;Delete</a>
+                            <a href="/AccountingObjectBankAccount/Create/{{item.id}}" class="text-white btn bg-gradient-secondary btn-xs btn-filter mr-2" type="button"><i class="fas fa-plus-circle"></i>&nbsp;A/C</a>
                         </td>
 
                     </tr>

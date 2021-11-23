@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewData["Title"] = "Add Bank Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Style{
+    <style>
+        * {
+            font-family: Inter;
+            font-style: normal;
+        }
+
+        .select2-container--default .select2-selection--single {
+            border-radius: 0px !important;
+        }
+
+        input.ng-touched.ng-invalid {
+            border: 2px solid red;
+        }
+
+    </style>
+}
+<div class="card" ng-controller="AccountingObjectBankAccountController" ng-init="OnInit('@ViewBag.AccountingObjectId')">
+    <form name="frm">
+        <div class="card-body">
+            <div class="shadow rounded">
+                <div class="title text-center w-100 pt-2 text-dark font-weight-bolder">Add Bank Account</div>
+                <hr class="border-bottom-light mb-0" />
+                <div class="p-2">
+                    <div class="row">
+                        <input ng-model="model.id" hidden />
+                        <input ng-model="model.accountingObjectId" hidden />
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="bankAccount">Account Number <span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
+                            <input ng-model="model.bankAccount" placeholder="" type="text" class="form-control form-control-sm" id="bankAccount" name="bankAccount" required />
+                            <span ng-show="frm.bankAccount.$touched && frm.bankAccount.$invalid" style="color:red">Account Number is required.</span>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="bankName">Bank Name <span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
+                            <input ng-model="model.bankName" placeholder="" type="text" class="form-control form-control-sm" id="bankName" name="bankName" required />
+                            <span ng-show="frm.bankName.$touched && frm.bankName.$invalid" style="color:red">Bank Name is required.</span>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="bankBranchName">Bank Branch Name <span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
+                            <input ng-model="model.bankBranchName" placeholder="" type="text" class="form-control form-control-sm" id="bankBranchName" name="bankBranchName" required />
+                            <span ng-show="frm.bankBranchName.$touched && frm.bankBranchName.$invalid" style="color:red">Bank Branch Name   is required.</span>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="control-label text-sm-left text-dark font-weight-bolder" for="accountHolderName">Account Holder Name <span class="text-danger font-weight-bold">&nbsp;(*)</span></label>
+                            <input ng-model="model.accountHolderName" placeholder="" type="text" class="form-control form-control-sm" id="accountHolderName" name="accountHolderName" required />
+                            <span ng-show="frm.accountHolderName.$touched && frm.accountHolderName.$invalid" style="color:red">Account Holder Name is required.</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-right">            
+            <button type="button" ng-click="Save(1)" ng-disabled="frm.$invalid" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> &nbsp;Save & Exit</button>
+            <a href="/CustomerSupplier/Index" class="btn btn-sm btn-danger"><i class="fas fa-times-circle"></i> &nbsp;Cancel</a>
+        </div>
+    </form>
+
+</div>
+@section Scripts{
+    <script src="~/js/angularjsservices/accountingobjectbankaccountservice.js"></script>
+}

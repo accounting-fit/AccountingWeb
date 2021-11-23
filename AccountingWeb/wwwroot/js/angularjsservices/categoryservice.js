@@ -22,44 +22,14 @@
             itemSource: ""
         };
 
-        var customList = [
-              { id:"1", text: "Goods, supplies" }
-            , { id:"2", text: "Pieces of goods, suppliers" }
-            , { id:"3", text: "Service" }
-            , { id:"4", text: "Finished product" }
-            , { id:"5", text: "Just an interpretation" }
-            , { id:"6", text: "Other" }
-        ]
-
-        var getCustomName = function (id) {
-
-            var name = "";
-            for (var i = 0; i < customList.length; i++){
-
-                if (customList[i].id == id) {
-                    name = customList[i].text;
-                    break;
-                }
-            }
-            return name;
-
-        }
-
-        $scope.customCodeList = customList;
+       
 
         $scope.matGoodsCatList = [];
 
         $scope.warrantyTimeList = warrantyTimeList;
 
         $scope.repositoryList = [];
-        var taxList = [
-             { id: "0", text: "0%" }
-            ,{ id: "5", text: "5%" }
-            ,{ id: "10", text: "10%" }
-            ,{ id: "-1", text: "No Tax" }
-            ,{ id: "-2", text: "Uncalculated tax" }
-                      ]
-        $scope.taxRateList = taxList;
+       
         var expanceAccountList = [
             { id: "154", text:"154" }
             , { id: "2411", text: "2411" }
@@ -130,6 +100,8 @@
 
         GetAllMaterialGoodsCategory();
         GetAllRepository();
+        GetAllMaterialGoodsTypeList();
+        GetAllTaxRateList();
        
 
         $scope.GetAll = function () {
@@ -141,10 +113,7 @@
                 if (response.status === 200) {
                     var data = response.data;
                     debugger;
-                    var allData = data.categoryEntityModelList;
-                    for(var i = 0; i < allData.length; i++) {
-                        allData[i].customCode = getCustomName(allData[i].materialGoodsType);
-                    }                   
+                    var allData = data.categoryEntityModelList;                                      
                     $scope.GetAll = allData;
                 }
 
@@ -381,8 +350,42 @@
 
             }, function (response) {
                 console.log(response);
+            });            
+        }
+
+        function GetAllMaterialGoodsTypeList() {
+            var url = '/ApiCategory/GetAllMaterialGoodsTypeList';
+            $http({
+                method: 'GET',
+                url: url,
+            }).then(function (response) {
+                console.log(response);
+                if (response.status === 200) {
+                    var data = response.data;
+                    $scope.materialGoodsTypeList = data.getAllMaterialGoodsTypeList;
+                }
+
+            }, function (response) {
+                console.log(response);
             });
         }
+
+        function GetAllTaxRateList() {
+            var url = '/ApiCategory/GetAllTaxRateList';
+            $http({
+                method: 'GET',
+                url: url,
+            }).then(function (response) {
+                console.log(response);
+                if (response.status === 200) {
+                    var data = response.data;
+                    $scope.taxRateList = data.getAllTaxRateList;
+                }
+
+            }, function (response) {
+                console.log(response);
+            });
+        }      
 
     });
 

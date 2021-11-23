@@ -10,7 +10,7 @@ namespace AccountingWeb.Models.ViewModels
         public Guid id { get; set; }
         public string Nhom { get; set; }
         public bool isSalesDiscountPolicy { get; set; }
-        public string customCode { get; set; }
+        public string materialGoodsTypeName { get; set; }
         public string expanceAccountId { get; set; }
         public string itemSource { get; set; }
         public string matGoodsCatId { get; set; }

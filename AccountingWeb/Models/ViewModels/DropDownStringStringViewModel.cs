@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace AccountingWeb.Models.ViewModels
 {
-    public class DropDownViewModel
+    public class DropDownStringStringViewModel
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public string Text { get; set; }
-
     }
 }

@@ -31,7 +31,12 @@ namespace AccountingWeb.ApiController
                 await con.OpenAsync();
                 try
                 {
-                    var categoryEntityModelData = await con.QueryAsync<CategoryEntityModel>(selectMaterialGoods);                    
+                    var categoryEntityModelData = await con.QueryAsync<CategoryEntityModel>(selectMaterialGoods);    
+                    
+                    foreach(var item in categoryEntityModelData)
+                    {
+                        item.materialGoodsTypeName = GetMaterialGoodsTypeName(item.MaterialGoodsType);
+                    }
 
                     return Ok(new { ok = false, categoryEntityModelList = categoryEntityModelData.ToList()});
                 }
@@ -284,9 +289,9 @@ namespace AccountingWeb.ApiController
         [Route("ExportExcel")]
          public async Task<FileResult> ExportExcel()
         {
-            string selectMaterialGoods = @"SELECT * FROM [MaterialGoods] A
-inner join MaterialGoodsCategory B ON A.MaterialGoodsCategoryID=B.ID
-Inner join Repository C On A.RepositoryID=C.ID";
+            string selectMaterialGoods = @"SELECT A.*,B.MaterialGoodsCategoryCode,C.RepositoryCode FROM [MaterialGoods] A
+Left join MaterialGoodsCategory B ON A.MaterialGoodsCategoryID=B.ID
+Left join Repository C On A.RepositoryID=C.ID";
             using (var con = new SqlConnection(GlobalClass.ConnectionString))
             {
                 await con.OpenAsync();
@@ -301,31 +306,34 @@ Inner join Repository C On A.RepositoryID=C.ID";
                         
                         var worksheet = workbook.Worksheets.Add("CategoryList");
                         var currentRow = 1;
-                        worksheet.Cell(currentRow, 1).Value = "Ma Hang";
-                        worksheet.Cell(currentRow, 2).Value = "Ten Hang";
-                        worksheet.Cell(currentRow, 3).Value = "Tinh chat";
-                        worksheet.Cell(currentRow, 4).Value = "Loi";
-                        worksheet.Cell(currentRow, 5).Value = "Don vi tinh";
-                        worksheet.Cell(currentRow, 6).Value = "Thoi han BH";
-                        worksheet.Cell(currentRow, 7).Value = "So luong ton toi thieu";
-                        worksheet.Cell(currentRow, 8).Value = "Don gia mua";
-                        worksheet.Cell(currentRow, 9).Value = "Don gia ban";
-                        worksheet.Cell(currentRow, 10).Value = "Kho ngam dinh";
-                        worksheet.Cell(currentRow, 11).Value = "hue Suat(%)";
-                        worksheet.Cell(currentRow, 12).Value = "Tk chi phi";
-                        worksheet.Cell(currentRow, 13).Value = "Tai khoan kho";
-                        worksheet.Cell(currentRow, 14).Value = "Ty le CKMH(%)";
-                        worksheet.Cell(currentRow, 15).Value = "Tk doanh thu";
-                        worksheet.Cell(currentRow, 16).Value = "Ty le CKBH(%)";
-                        worksheet.Cell(currentRow, 17).Value = "Nguan goc";
+                        worksheet.Cell(currentRow, 1).Value = "Goods Code";
+                        worksheet.Cell(currentRow, 2).Value = " Goods Name";
+                        worksheet.Cell(currentRow, 3).Value = "Property";
+                        worksheet.Cell(currentRow, 4).Value = "Type";
+                        worksheet.Cell(currentRow, 5).Value = "Unit";
+                        worksheet.Cell(currentRow, 6).Value = "Warranty Time";
+                        worksheet.Cell(currentRow, 7).Value = "Minimum Stock";
+                        worksheet.Cell(currentRow, 8).Value = "Purchase Price";
+                        worksheet.Cell(currentRow, 9).Value = "Sale Price";
+                        worksheet.Cell(currentRow, 10).Value = "Repository";
+                        worksheet.Cell(currentRow, 11).Value = "Tax Rate(%)";
+                        worksheet.Cell(currentRow, 12).Value = "Expance Accounting";
+                        worksheet.Cell(currentRow, 13).Value = "Repository Account";
+                        worksheet.Cell(currentRow, 14).Value = "Purchase discount rate(%)";
+                        worksheet.Cell(currentRow, 15).Value = "Revenue Account";
+                        worksheet.Cell(currentRow, 16).Value = "Sales Discount Rate(%)";
+                        worksheet.Cell(currentRow, 17).Value = "Service goods with special tax";
+                        worksheet.Cell(currentRow, 18).Value = "Sales Discount Policy";
+                        worksheet.Cell(currentRow, 19).Value = "Item Source";
+                        worksheet.Cell(currentRow, 20).Value = "IsActive";
 
-                        worksheet.Row(currentRow).Cells(1, 17).Style.Border.TopBorder = XLBorderStyleValues.Thin;
-                        worksheet.Row(currentRow).Cells(1, 17).Style.Border.RightBorder = XLBorderStyleValues.Thin;
-                        worksheet.Row(currentRow).Cells(1, 17).Style.Border.BottomBorder = XLBorderStyleValues.Thin;
-                        worksheet.Row(currentRow).Cells(1, 17).Style.Border.LeftBorder = XLBorderStyleValues.Thin;
+                        worksheet.Row(currentRow).Cells(1, 20).Style.Border.TopBorder = XLBorderStyleValues.Thin;
+                        worksheet.Row(currentRow).Cells(1, 20).Style.Border.RightBorder = XLBorderStyleValues.Thin;
+                        worksheet.Row(currentRow).Cells(1, 20).Style.Border.BottomBorder = XLBorderStyleValues.Thin;
+                        worksheet.Row(currentRow).Cells(1, 20).Style.Border.LeftBorder = XLBorderStyleValues.Thin;
 
-                        worksheet.Row(1).Cells(1, 17).Style.Fill.SetBackgroundColor(XLColor.Yellow);
-                        worksheet.Row(1).Cells(1, 17).Style.Font.Bold=true;
+                        worksheet.Row(1).Cells(1, 20).Style.Fill.SetBackgroundColor(XLColor.Yellow);
+                        worksheet.Row(1).Cells(1, 20).Style.Font.Bold=true;
 
                         foreach (DataRow row in table.Rows)
                         {
@@ -335,7 +343,7 @@ Inner join Repository C On A.RepositoryID=C.ID";
                          */
                             worksheet.Cell(currentRow, 1).Value = row["MaterialGoodsCode"].ToString();
                             worksheet.Cell(currentRow, 2).Value = row["MaterialGoodsName"].ToString();
-                            worksheet.Cell(currentRow, 3).Value = row["MaterialGoodsType"].ToString();
+                            worksheet.Cell(currentRow, 3).Value = GetMaterialGoodsTypeName(Convert.ToInt32(row["MaterialGoodsType"].ToString()));
                             worksheet.Cell(currentRow, 4).Value = row["MaterialGoodsCategoryCode"].ToString();
                             worksheet.Cell(currentRow, 5).Value = row["Unit"].ToString();
                             worksheet.Cell(currentRow, 6).Value = row["WarrantyTime"].ToString();
@@ -343,18 +351,21 @@ Inner join Repository C On A.RepositoryID=C.ID";
                             worksheet.Cell(currentRow, 8).Value = row["PurchasePrice"].ToString();
                             worksheet.Cell(currentRow, 9).Value = row["SalePrice"].ToString();
                             worksheet.Cell(currentRow, 10).Value =row["RepositoryCode"].ToString();
-                            worksheet.Cell(currentRow, 11).Value =row["TaxRate"].ToString();
+                            worksheet.Cell(currentRow, 11).Value = GetTaxRateName(Convert.ToInt32(row["TaxRate"]).ToString());
                             worksheet.Cell(currentRow, 12).Value =row["ExpenseAccount"].ToString();
                             worksheet.Cell(currentRow, 13).Value =row["ReponsitoryAccount"].ToString();
                             worksheet.Cell(currentRow, 14).Value =row["PurchaseDiscountRate"].ToString();
-                            worksheet.Cell(currentRow, 15).Value =row["RevenueAccount"].ToString();
-                            worksheet.Cell(currentRow, 16).Value =row["SaleDiscountRate"].ToString(); 
-                            worksheet.Cell(currentRow, 17).Value =row["ItemSource"].ToString();
+                            worksheet.Cell(currentRow, 15).Value =row["RevenueAccount"].ToString();                            
+                            worksheet.Cell(currentRow, 16).Value =row["SaleDiscountRate"].ToString();
+                            worksheet.Cell(currentRow, 17).Value = "Service goods with special tax";
+                            worksheet.Cell(currentRow, 18).Value = row["IsSaleDiscountPolicy"]?.ToString() == "True" ? 1 : 0;
+                            worksheet.Cell(currentRow, 19).Value = row["ItemSource"].ToString();
+                            worksheet.Cell(currentRow, 20).Value = row["IsActive"]?.ToString() == "True" ? 1 : 0;
 
-                            worksheet.Row(currentRow).Cells(1, 17).Style.Border.TopBorder = XLBorderStyleValues.Thin;
-                            worksheet.Row(currentRow).Cells(1, 17).Style.Border.RightBorder = XLBorderStyleValues.Thin;
-                            worksheet.Row(currentRow).Cells(1, 17).Style.Border.BottomBorder = XLBorderStyleValues.Thin;
-                            worksheet.Row(currentRow).Cells(1, 17).Style.Border.LeftBorder = XLBorderStyleValues.Thin;
+                            worksheet.Row(currentRow).Cells(1,20).Style.Border.TopBorder = XLBorderStyleValues.Thin;
+                            worksheet.Row(currentRow).Cells(1,20).Style.Border.RightBorder = XLBorderStyleValues.Thin;
+                            worksheet.Row(currentRow).Cells(1,20).Style.Border.BottomBorder = XLBorderStyleValues.Thin;
+                            worksheet.Row(currentRow).Cells(1,20).Style.Border.LeftBorder = XLBorderStyleValues.Thin;
 
 
                         }
@@ -393,7 +404,7 @@ Inner join Repository C On A.RepositoryID=C.ID";
                 await con.OpenAsync();
                 try
                 {
-                    var dataList = await con.QueryAsync<DropDownViewModel>(SelectedAllDataQuery);
+                    var dataList = await con.QueryAsync<DropDownGuidStringViewModel>(SelectedAllDataQuery);
 
                     return Ok(new { ok = false, GetAllMaterialGoodsCategory = dataList.ToList() });
                 }
@@ -421,7 +432,7 @@ Inner join Repository C On A.RepositoryID=C.ID";
                 await con.OpenAsync();
                 try
                 {
-                    var dataList = await con.QueryAsync<DropDownViewModel>(SelectedAllDataQuery);
+                    var dataList = await con.QueryAsync<DropDownGuidStringViewModel>(SelectedAllDataQuery);
 
                     return Ok(new { ok = false, GetAllRepository = dataList.ToList() });
                 }
@@ -437,5 +448,103 @@ Inner join Repository C On A.RepositoryID=C.ID";
             }
 
         }
+
+
+
+        public List<DropDownStringStringViewModel> AllMaterialGoodsTypeList()
+        {
+            var allMaterialGoodsTypeList = new List<DropDownStringStringViewModel>(){
+                       new DropDownStringStringViewModel{ Id = "1",Text= "Goods, supplies" }
+                      ,new DropDownStringStringViewModel{ Id = "2",Text= "Pieces of goods, suppliers" }
+                      ,new DropDownStringStringViewModel{ Id = "3",Text= "Service" }
+                      ,new DropDownStringStringViewModel{ Id = "4",Text= "Finished product" }
+                      ,new DropDownStringStringViewModel{ Id = "5",Text= "Just an interpretation" }
+                      ,new DropDownStringStringViewModel{ Id = "6",Text= "Other" }
+                };
+            return allMaterialGoodsTypeList;
+        }
+
+
+        public string GetMaterialGoodsTypeName(int? id)
+        {
+            var result = string.Empty;
+            var data = AllMaterialGoodsTypeList().Where(a => a.Id == id.ToString()).FirstOrDefault();
+            if (data!=null)
+            {
+                result = data.Text;
+            }
+
+           return result;
+        }
+
+        [HttpGet]
+        [Route("GetAllMaterialGoodsTypeList")]
+        public async Task<IActionResult> GetAllMaterialGoodsTypeList()
+        {
+            try
+            {
+                var dataList = AllMaterialGoodsTypeList();
+
+                return Ok(new { ok = false, GetAllMaterialGoodsTypeList = dataList.ToList() });
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex);
+            }
+            finally
+            {
+
+            }
+        }
+
+
+
+        public List<DropDownStringStringViewModel> AllTaxRateList()
+        {
+            var allMaterialGoodsTypeList = new List<DropDownStringStringViewModel>(){
+                       new DropDownStringStringViewModel { Id= "0",  Text= "0%" }
+                      ,new DropDownStringStringViewModel { Id= "5",  Text= "5%" }
+                      ,new DropDownStringStringViewModel { Id= "10", Text="10%" }
+                      ,new DropDownStringStringViewModel { Id= "-1", Text="No Tax" }
+                      ,new DropDownStringStringViewModel { Id= "-2", Text="Uncalculated tax" }                     
+                };
+            return allMaterialGoodsTypeList;
+        }
+
+
+        public string GetTaxRateName(string id)
+        {
+            var result = string.Empty;
+            var data = AllTaxRateList().Where(a => a.Id == id).FirstOrDefault();
+            if (data != null)
+            {
+                result = data.Text;
+            }
+
+            return result;
+        }
+
+        [HttpGet]
+        [Route("GetAllTaxRateList")]
+        public async Task<IActionResult> GetAllTaxRateList()
+        {
+            try
+            {
+                var dataList = AllTaxRateList();
+
+                return Ok(new { ok = false, GetAllTaxRateList = dataList.ToList() });
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex);
+            }
+            finally
+            {
+
+            }
+        }
+
     }
 }

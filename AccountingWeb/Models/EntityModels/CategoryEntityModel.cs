@@ -64,7 +64,7 @@ namespace AccountingWeb.Models.EntityModels
         [NotMapped]
         public int? stockValue { get; set; } = 0;
         [NotMapped]
-        public string customCode { get; set; }
+        public string materialGoodsTypeName { get; set; }
 
     }
 }

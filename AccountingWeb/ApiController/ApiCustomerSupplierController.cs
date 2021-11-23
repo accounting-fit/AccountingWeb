@@ -536,7 +536,7 @@ namespace AccountingWeb.ApiController
                 await con.OpenAsync();
                 try
                 {
-                    var dataList = await con.QueryAsync<DropDownViewModel>(SelectedAllDataQuery);
+                    var dataList = await con.QueryAsync<DropDownGuidStringViewModel>(SelectedAllDataQuery);
 
                     return Ok(new { ok = false, GetAllAccountingObjectGroup = dataList.ToList() });
                 }
@@ -566,7 +566,7 @@ namespace AccountingWeb.ApiController
                 await con.OpenAsync();
                 try
                 {
-                    var dataList = await con.QueryAsync<DropDownViewModel>(SelectedAllDataQuery);
+                    var dataList = await con.QueryAsync<DropDownGuidStringViewModel>(SelectedAllDataQuery);
 
                     return Ok(new { ok = false, GetAllPaymentClause = dataList.ToList() });
                 }
@@ -582,8 +582,6 @@ namespace AccountingWeb.ApiController
             }
 
         }
-
-
-
+        
     }
 }
