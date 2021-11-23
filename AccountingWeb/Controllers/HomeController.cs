@@ -18,6 +18,7 @@ namespace AccountingWeb.Controllers
             _logger = logger;
         }
 
+
         public IActionResult Index()
         {
             ViewData["Action"] = "Dashboard";
