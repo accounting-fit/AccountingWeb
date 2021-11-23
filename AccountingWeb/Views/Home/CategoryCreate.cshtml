@@ -82,12 +82,11 @@
                             <label class="control-label text-sm-left text-dark font-weight-bolder" for="salesPrice">Sale Price</label>
                             <div class="input-group">
                                 <input ng-model="model.salesPrice" placeholder="Sale unit price" type="text" class="form-control form-control-sm" id="salesPrice" name="salesPrice" ng-pattern="/^\d{0,100}.{0,1}\d{0,10}?$/" />
-                                <span ng-show="frm.salesPrice.$touched && frm.salesPrice.$invalid" style="color:red">Please provide number/decimal only</span>
                                 <div class="input-group-append">
                                     <button class="btn btn-sm btn-primary"><i class="fas fa-ellipsis-h"></i></button>
                                 </div>
                             </div>
-
+                            <span ng-show="frm.salesPrice.$touched && frm.salesPrice.$invalid" style="color:red">Please provide number/decimal only</span>
                         </div>
                         <div class="col-6 mb-2">
                             <label class="control-label text-sm-left text-dark font-weight-bolder" for="repositoryId">Repository</label>
