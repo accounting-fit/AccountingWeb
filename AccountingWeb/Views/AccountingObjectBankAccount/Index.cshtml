@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "Customer & Supplier List";
+    ViewData["Title"] = "Bank Account List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -102,7 +102,7 @@
             border: none;
         }
 </style>
-<div class="card" ng-controller="CustomerSupplierController" ng-init="GetAll()">
+<div class="card" ng-controller="AccountingObjectBankAccountController" ng-init="GetAll('@ViewBag.AccountingObjectID')">
     <div class="card-body pt-2 p-0 m-0">
         <div class="row">
             <div class="col-1 pl-3 ">
@@ -117,44 +117,41 @@
                 </div>
             </div>
             <div class="col-6 pr-3 pl-3 text-right">
-                <a href="/CustomerSupplier/Create" class="text-white btn bg-gradient-info btn-xs btn-filter mr-2" type="button"><i class="fas fa-plus-circle"></i>&nbsp;Add</a> 
-                <button title="Export To Excel" ng-click="ExportToExcel()" class="text-white btn bg-gradient-primary btn-xs btn-filter" type="button"><i class="fas fa-file-excel"></i>&nbsp;Export</button>
+                <a href="/CustomerSupplier/Index" class="text-white btn bg-gradient-dark btn-xs btn-filter mr-2" type="button"><i class="fas fa-backspace"></i>&nbsp;Back</a>
+                <a href="/AccountingObjectBankAccount/Create/@ViewBag.accountingObjectID" class="text-white btn bg-gradient-info btn-xs btn-filter mr-2" type="button"><i class="fas fa-plus-circle"></i>&nbsp;Add</a>
+                <button title="Export To Excel" ng-click="ExportToExcel('@ViewBag.accountingObjectID')" class="text-white btn bg-gradient-primary btn-xs btn-filter" type="button"><i class="fas fa-file-excel"></i>&nbsp;Export</button>
+                
             </div>
         </div>
         <div class="table-responsive">
             <table id="category" class="table table-sm">
                 <thead>
                     <tr>                      
-                        <th>Customer (Supplier) Code</th>
-                        <th>Customer (Supplier) Name</th>
-                        <th>Addreess</th>
-                        <th>Tax Code</th>
-                        <th>IsActive</th>
+                        <th>Acccount Number</th>
+                        <th>Bank Name</th>
+                        <th>Branch Name</th>
+                        <th>Account Name</th>                     
                         <th>Action</th>
                     </tr>
                 </thead>
 
                 <tbody style="background-color:white;">
-                    <tr ng-repeat="item in AllDataList">                        
+                    <tr ng-repeat="item in AllDataList">                      
                         <td>
-                            <span class="table-data-font">{{item.accountingObjectCode}}</span><br />
+                            <span class="table-data-font">{{item.bankAccount}}</span><br />
                         </td>
                         <td>
-                            <span class="table-data-font">{{item.accountingObjectName}}</span><br />
+                            <span class="table-data-font">{{item.bankName}}</span><br />
                         </td>
                         <td>
-                            <span class="table-data-font">{{item.address}}</span><br />
+                            <span class="table-data-font">{{item.bankBranchName}}</span><br />
                         </td>
                         <td>
-                            <span class="table-data-font">{{item.taxCode}}</span><br />
-                        </td>
+                            <span class="table-data-font">{{item.accountHolderName}}</span><br />
+                        </td>                        
                         <td>
-                            <span class="table-data-font">{{item.isActive==true?1:0}}</span><br />
-                        </td>
-                        <td>
-                            <a href="/CustomerSupplier/Edit/{{item.id}}" class="text-white btn bg-gradient-success btn-xs btn-filter mr-2" type="button"><i class="fas fa-edit"></i>&nbsp;Edit</a>
-                            <a href="/CustomerSupplier/Delete/{{item.id}}" class="text-white btn bg-gradient-danger btn-xs btn-filter mr-2" type="button"><i class="fas fa-trash"></i>&nbsp;Delete</a>
-                            <a href="/AccountingObjectBankAccount/Index/{{item.id}}" class="text-white btn bg-gradient-secondary btn-xs btn-filter mr-2" type="button"><i class="fas fa-link"></i>&nbsp;A/C</a>
+                            <a href="/AccountingObjectBankAccount/Edit/{{item.id}}" class="text-white btn bg-gradient-success btn-xs btn-filter mr-2" type="button"><i class="fas fa-edit"></i>&nbsp;Edit</a>
+                            <a href="/AccountingObjectBankAccount/Delete/{{item.id}}" class="text-white btn bg-gradient-danger btn-xs btn-filter mr-2" type="button"><i class="fas fa-trash"></i>&nbsp;Delete</a>
                         </td>
 
                     </tr>
@@ -162,7 +159,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="4" class="text-right" style=" padding-top: 1rem;">
+                        <td colspan="3" class="text-right" style=" padding-top: 1rem;">
                             <span>Rows per page:</span>
                             <select>
                                 <option>10</option>
@@ -192,5 +189,5 @@
     </div>
 </div>
 @section Scripts{
-    <script src="~/js/angularjsservices/customersupplierservice.js"></script>
+    <script src="~/js/angularjsservices/accountingobjectbankaccountservice.js"></script>
 } 
