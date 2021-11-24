@@ -29,6 +29,7 @@
         }    
 
         $scope.Save = function (isClose) {
+            debugger;
             var model = $scope.model;      
             var url = '/ApiAccountingObjectBankAccount/Save';
             $http({
@@ -44,12 +45,12 @@
                             title: "Success!",
                             text: "Save Success"
                         }).then((result) => {
-
+                            debugger;
                             if (isClose === 1) {            
                                 window.location.href = "/CustomerSupplier/Index";
                             }
                             else {
-                                window.location.href = "/CustomerSupplier/Index";
+                                window.location.href = "/AccountingObjectBankAccount/create/" + model.accountingObjectId;
                             }
                         });
 
