@@ -23,33 +23,7 @@ namespace AccountingWeb.Controllers
         {
             ViewData["Action"] = "Dashboard";
             return View();
-        }
-
-        public IActionResult CategoryIndex()
-        {
-            ViewData["Action"] = "Category List";
-            return View();
-        }
-        public IActionResult CategoryCreate()
-        {
-            ViewData["Action"] = "Create Category";
-            return View();
-        }
-
-        public IActionResult Edit(string id)
-        {
-            ViewData["Action"] = "Edit Category";
-            ViewBag.Id = id;
-            return View();
-        }
-
-        public IActionResult Delete(string id)
-        {
-            ViewData["Action"] = "Delete Category";
-            ViewBag.Id = id;
-            return View();
-        }
-
+        }       
 
         [HttpGet]
         public IActionResult Blank(int id)

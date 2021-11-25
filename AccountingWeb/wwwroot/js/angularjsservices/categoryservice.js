@@ -123,7 +123,7 @@
         }
 
         $scope.OnInit = function () {
-            $scope.model.materialGoodsType="1"
+             $scope.model.materialGoodsType="0"
              $scope.model.warrantyTime="0"
         }
 
@@ -151,10 +151,10 @@
                         }).then((result) => {
                             
                             if (isClose === 1) {
-                                window.location.href = "/Home/CategoryIndex";
+                                window.location.href = "/Category/Index";
                             }
                             else {
-                                window.location.href = "/Home/CategoryCreate";
+                                window.location.href = "/Category/Create";
                             }
                            });
                         
@@ -239,7 +239,7 @@
                             $scope.AllClear();
                             if (isClose === 1) {
 
-                                window.location.href = "/Home/CategoryIndex";
+                                window.location.href = "/Category/Index";
                             }
                         });
 
@@ -285,7 +285,7 @@
                             text: "Delete Success"
                         }).then((result) => {
                             $scope.AllClear();
-                            window.location.href = "/Home/CategoryIndex";
+                            window.location.href = "/Category/Index";
                         });
 
                     } else {

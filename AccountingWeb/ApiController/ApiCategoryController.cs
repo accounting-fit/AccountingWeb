@@ -341,25 +341,25 @@ Left join Repository C On A.RepositoryID=C.ID";
                             /*
                          ID	MaterialGoodsCategoryID			MaterialGoodsType	MaterialToolType		ConvertUnit	ConvertRate			SalePrice2	SalePrice3	FixedSalePrice	SalePriceAfterTax	SalePriceAfterTax2	SalePriceAfterTax3	IsSalePriceAfterTax	RepositoryID					AccountingObjectID		SystemMaterialGoodsType	SaleDescription	PurchaseDescription		MaterialGoodsGSTID			IsSaleDiscountPolicy	GuarantyPeriod	CostMethod	IsActive	IsSecurity	PrintMetarial	LastPurchasePriceAfterTax		Quantity	UnitPrice	Amount	AllocationTimes	AllocatedAmount	AllocationAccount	CostSetID	AllocationType	AllocationAwaitAccount	CareerGroupID 	ID		MaterialGoodsCategoryName	ParentID	IsParentNode	OrderFixCode	Grade	IsTool	IsActive	IsSecurity	ID	BranchID		RepositoryName	Description	DefaultAccount	IsActive
                          */
-                            worksheet.Cell(currentRow, 1).Value = row["MaterialGoodsCode"].ToString();
-                            worksheet.Cell(currentRow, 2).Value = row["MaterialGoodsName"].ToString();
-                            worksheet.Cell(currentRow, 3).Value = GetMaterialGoodsTypeName(Convert.ToInt32(row["MaterialGoodsType"].ToString()));
-                            worksheet.Cell(currentRow, 4).Value = row["MaterialGoodsCategoryCode"].ToString();
-                            worksheet.Cell(currentRow, 5).Value = row["Unit"].ToString();
-                            worksheet.Cell(currentRow, 6).Value = row["WarrantyTime"].ToString();
-                            worksheet.Cell(currentRow, 7).Value = row["MinimumStock"].ToString();
-                            worksheet.Cell(currentRow, 8).Value = row["PurchasePrice"].ToString();
-                            worksheet.Cell(currentRow, 9).Value = row["SalePrice"].ToString();
-                            worksheet.Cell(currentRow, 10).Value =row["RepositoryCode"].ToString();
+                            worksheet.Cell(currentRow, 1).Value = row["MaterialGoodsCode"]?.ToString();
+                            worksheet.Cell(currentRow, 2).Value = row["MaterialGoodsName"]?.ToString();
+                            worksheet.Cell(currentRow, 3).Value = GetMaterialGoodsTypeName(Convert.ToInt32(row["MaterialGoodsType"]?.ToString()));
+                            worksheet.Cell(currentRow, 4).Value = row["MaterialGoodsCategoryCode"]?.ToString();
+                            worksheet.Cell(currentRow, 5).Value = row["Unit"]?.ToString();
+                            worksheet.Cell(currentRow, 6).Value = row["WarrantyTime"]?.ToString();
+                            worksheet.Cell(currentRow, 7).Value = row["MinimumStock"]?.ToString();
+                            worksheet.Cell(currentRow, 8).Value = row["PurchasePrice"]?.ToString();
+                            worksheet.Cell(currentRow, 9).Value = row["SalePrice"]?.ToString();
+                            worksheet.Cell(currentRow, 10).Value =row["RepositoryCode"]?.ToString();
                             worksheet.Cell(currentRow, 11).Value = GetTaxRateName(Convert.ToInt32(row["TaxRate"]).ToString());
-                            worksheet.Cell(currentRow, 12).Value =row["ExpenseAccount"].ToString();
-                            worksheet.Cell(currentRow, 13).Value =row["ReponsitoryAccount"].ToString();
-                            worksheet.Cell(currentRow, 14).Value =row["PurchaseDiscountRate"].ToString();
-                            worksheet.Cell(currentRow, 15).Value =row["RevenueAccount"].ToString();                            
-                            worksheet.Cell(currentRow, 16).Value =row["SaleDiscountRate"].ToString();
+                            worksheet.Cell(currentRow, 12).Value =row["ExpenseAccount"]?.ToString();
+                            worksheet.Cell(currentRow, 13).Value =row["ReponsitoryAccount"]?.ToString();
+                            worksheet.Cell(currentRow, 14).Value =row["PurchaseDiscountRate"]?.ToString();
+                            worksheet.Cell(currentRow, 15).Value =row["RevenueAccount"]?.ToString();                            
+                            worksheet.Cell(currentRow, 16).Value =row["SaleDiscountRate"]?.ToString();
                             worksheet.Cell(currentRow, 17).Value = "Service goods with special tax";
                             worksheet.Cell(currentRow, 18).Value = row["IsSaleDiscountPolicy"]?.ToString() == "True" ? 1 : 0;
-                            worksheet.Cell(currentRow, 19).Value = row["ItemSource"].ToString();
+                            worksheet.Cell(currentRow, 19).Value = row["ItemSource"]?.ToString();
                             worksheet.Cell(currentRow, 20).Value = row["IsActive"]?.ToString() == "True" ? 1 : 0;
 
                             worksheet.Row(currentRow).Cells(1,20).Style.Border.TopBorder = XLBorderStyleValues.Thin;
@@ -454,12 +454,12 @@ Left join Repository C On A.RepositoryID=C.ID";
         public List<DropDownStringStringViewModel> AllMaterialGoodsTypeList()
         {
             var allMaterialGoodsTypeList = new List<DropDownStringStringViewModel>(){
-                       new DropDownStringStringViewModel{ Id = "1",Text= "Goods, supplies" }
-                      ,new DropDownStringStringViewModel{ Id = "2",Text= "Pieces of goods, suppliers" }
-                      ,new DropDownStringStringViewModel{ Id = "3",Text= "Service" }
-                      ,new DropDownStringStringViewModel{ Id = "4",Text= "Finished product" }
-                      ,new DropDownStringStringViewModel{ Id = "5",Text= "Just an interpretation" }
-                      ,new DropDownStringStringViewModel{ Id = "6",Text= "Other" }
+                       new DropDownStringStringViewModel{ Id = "0",Text= "Goods, supplies" }
+                      ,new DropDownStringStringViewModel{ Id = "1",Text= "Pieces of goods, suppliers" }
+                      ,new DropDownStringStringViewModel{ Id = "2",Text= "Service" }
+                      ,new DropDownStringStringViewModel{ Id = "3",Text= "Finished product" }
+                      ,new DropDownStringStringViewModel{ Id = "4",Text= "Just an interpretation" }
+                      ,new DropDownStringStringViewModel{ Id = "5",Text= "Other" }
                 };
             return allMaterialGoodsTypeList;
         }

@@ -24,20 +24,20 @@ namespace AccountingWeb.Controllers
             ViewData["Action"] = "Bank Account List";
             ViewBag.AccountingObjectID = id;
             TempData["AccountingObjectID"] = id;
-            return View();
+            return View("~/Views/Main/CustomerSupplier/AccountingObjectBankAccount/Index.cshtml");
         }
         public IActionResult Create(string id)
         {
             ViewData["Action"] = "Add Bank Account";
             ViewBag.AccountingObjectID = id;
-            return View();
+            return View("~/Views/Main/CustomerSupplier/AccountingObjectBankAccount/Create.cshtml");
         }
 
         public IActionResult Edit(string id)
         {
             ViewData["Action"] = "Edit Bank Account";
             ViewBag.Id = id;
-            return View();
+            return View("~/Views/Main/CustomerSupplier/AccountingObjectBankAccount/Edit.cshtml");
         }
 
         public IActionResult Delete(string id)
@@ -45,7 +45,7 @@ namespace AccountingWeb.Controllers
             ViewData["Action"] = "Delete Bank Account";
             ViewBag.Id = id;
             ViewBag.AccountObjectID = TempData["AccountingObjectID"];
-            return View();
+            return View("~/Views/Main/CustomerSupplier/AccountingObjectBankAccount/Delete.cshtml");
         }
 
 

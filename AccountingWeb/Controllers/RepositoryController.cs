@@ -21,26 +21,26 @@ namespace AccountingWeb.Controllers
         public IActionResult Index()
         {
             ViewData["Action"] = "Repository List";
-            return View();
+            return View("~/Views/Main/Repository/Index.cshtml");
         }
         public IActionResult Create()
         {
             ViewData["Action"] = "Create Repository";
-            return View();
+            return View("~/Views/Main/Repository/Create.cshtml");
         }
 
         public IActionResult Edit(string id)
         {
             ViewData["Action"] = "Edit Repository";
             ViewBag.Id = id;
-            return View();
+            return View("~/Views/Main/Repository/Edit.cshtml");
         }
 
         public IActionResult Delete(string id)
         {
             ViewData["Action"] = "Delete Repository";
             ViewBag.Id = id;
-            return View();
+            return View("~/Views/Main/Repository/Delete.cshtml");
         }
     }
 }
