@@ -117,26 +117,26 @@
                 </div>
             </div>
             <div class="col-6 pr-3 pl-3 text-right">
-                @*<a href="/CustomerSupplier/Index" class="text-white btn bg-gradient-dark btn-xs btn-filter mr-2" type="button"><i class="fas fa-backspace"></i>&nbsp;Back</a>*@
+
                 <a href="/AccountingObjectBankAccount/Create/@ViewBag.accountingObjectID" class="text-white btn bg-gradient-info btn-xs btn-filter mr-2" type="button"><i class="fas fa-plus-circle"></i>&nbsp;Add</a>
-                @*<button title="Export To Excel" ng-click="ExportToExcel('@ViewBag.accountingObjectID')" class="text-white btn bg-gradient-primary btn-xs btn-filter" type="button"><i class="fas fa-file-excel"></i>&nbsp;Export</button>*@
-                
+                <button title="Export To Excel" ng-click="ExportToExcel('@ViewBag.accountingObjectID')" class="text-white btn bg-gradient-primary btn-xs btn-filter" type="button"><i class="fas fa-file-excel"></i>&nbsp;Export</button>
+
             </div>
         </div>
         <div class="table-responsive">
             <table id="category" class="table table-sm">
                 <thead>
-                    <tr>                      
+                    <tr>
                         <th>Acccount Number</th>
                         <th>Bank Name</th>
                         <th>Branch Name</th>
-                        <th>Account Name</th>                     
+                        <th>Account Name</th>
                         <th>Action</th>
                     </tr>
                 </thead>
 
                 <tbody style="background-color:white;">
-                    <tr ng-repeat="item in AllDataList">                      
+                    <tr ng-repeat="item in AllDataList">
                         <td>
                             <span class="table-data-font">{{item.bankAccount}}</span><br />
                         </td>
@@ -148,7 +148,7 @@
                         </td>
                         <td>
                             <span class="table-data-font">{{item.accountHolderName}}</span><br />
-                        </td>                        
+                        </td>
                         <td>
                             <a href="/AccountingObjectBankAccount/Edit/{{item.id}}" class="text-white btn bg-gradient-success btn-xs btn-filter mr-2" type="button"><i class="fas fa-edit"></i>&nbsp;Edit</a>
                             <a href="/AccountingObjectBankAccount/Delete/{{item.id}}" class="text-white btn bg-gradient-danger btn-xs btn-filter mr-2" type="button"><i class="fas fa-trash"></i>&nbsp;Delete</a>
@@ -183,11 +183,14 @@
                 </tfoot>
             </table>
         </div>
-
-
-
     </div>
 </div>
-@section Scripts{
-    <script src="~/js/angularjsservices/accountingobjectbankaccountservice.js"></script>
-} 
+
+
+    <div class="col-12 pr-3 pl-3 text-right" style="margin:2%">
+        <a href="/CustomerSupplier/Index" class="text-white btn bg-gradient-danger btn-xs btn-filter mr-2" type="button"><i class="fas fa-backspace"></i>&nbsp;Back</a>
+    </div>
+
+    @section Scripts{
+        <script src="~/js/angularjsservices/accountingobjectbankaccountservice.js"></script>
+    }
