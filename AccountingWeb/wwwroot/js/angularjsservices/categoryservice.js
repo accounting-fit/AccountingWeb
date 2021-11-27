@@ -22,6 +22,35 @@
             itemSource: ""
         };
 
+        //$('#salesPrice1').attr("disabled", false);
+        //$('#salesPriceAfterTax1').attr("disabled", true);
+        //$('#salesPrice2').attr("disabled", false);
+        //$('#salesPriceAfterTax2').attr("disabled", true);
+        //$('#salesPrice3').attr("disabled", false);
+        //$('#salesPriceAfterTax3').attr("disabled", true);
+        //$('#fixedSalePrice').attr("disabled", false);
+
+        //$scope.enableDisableInputField = function () {
+        //    if ($scope.model.isSalePriceAfterTax == true) {
+        //        $('#salesPrice1').attr("disabled", true);
+        //        $('#salesPriceAfterTax1').attr("disabled", false);
+        //        $('#salesPrice2').attr("disabled", true);
+        //        $('#salesPriceAfterTax2').attr("disabled", false);
+        //        $('#salesPrice3').attr("disabled", true);
+        //        $('#salesPriceAfterTax3').attr("disabled", false);
+        //        $('#fixedSalePrice').attr("disabled", true);
+        //    }
+        //    else {
+        //        $('#salesPrice1').attr("disabled", false);
+        //        $('#salesPriceAfterTax1').attr("disabled", true);
+        //        $('#salesPrice2').attr("disabled", false);
+        //        $('#salesPriceAfterTax2').attr("disabled", true);
+        //        $('#salesPrice3').attr("disabled", false);
+        //        $('#salesPriceAfterTax3').attr("disabled", true);
+        //        $('#fixedSalePrice').attr("disabled", false);
+        //    }
+        //};
+
        
 
         $scope.matGoodsCatList = [];
