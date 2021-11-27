@@ -3,21 +3,7 @@
     ViewData["Title"] = "Edit Category";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@section Style{
-    <style>
-        * {
-            font-family: Inter;
-            font-style: normal;
-        }
-       
-        .select2-container--default .select2-selection--single {
-            border-radius: 0px !important;
-        }
-        input.ng-touched.ng-invalid {
-            border: 2px solid red;
-        }
-    </style>
-}
+
 <div class="card" ng-controller="CategoryController" ng-init="GetById('@ViewBag.Id')">
     <form name="frm">
         <div class="card-body">

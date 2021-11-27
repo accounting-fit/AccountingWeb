@@ -1,22 +1,9 @@
 ﻿
 @{
-    ViewData["Title"] = "Tehm moi vat tu, hang hoa";
+    ViewData["Title"] = "Create Category";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@section Style{ 
-<style>
-    * {
-        font-family: Inter;
-        font-style: normal;
-    }
-   .select2-container--default .select2-selection--single {
-        border-radius: 0px !important;
-    }
-    input.ng-touched.ng-invalid {
-        border: 2px solid red;
-    }
-</style>
-}
+
 <div class="card" ng-controller="CategoryController" ng-init="OnInit()">
     <form name="frm">
         <div class="card-body">
@@ -83,11 +70,89 @@
                             <div class="input-group">
                                 <input ng-model="model.salesPrice" placeholder="Sale unit price" type="text" class="form-control form-control-sm" id="salesPrice" name="salesPrice" ng-pattern="/^\d{0,100}.{0,1}\d{0,10}?$/" />
                                 <div class="input-group-append">
-                                    <button class="btn btn-sm btn-primary"><i class="fas fa-ellipsis-h"></i></button>
+                                    <button class="btn btn-sm btn-primary" id="inputPriceButton"><i class="fas fa-ellipsis-h"></i></button>
                                 </div>
                             </div>
                             <span ng-show="frm.salesPrice.$touched && frm.salesPrice.$invalid" style="color:red">Please provide number/decimal only</span>
                         </div>
+
+                        @*<div id="inputPriceDiv">
+
+                            <div class="col-6 mb-2">
+                                <label class="control-label text-sm-left text-dark font-weight-bolder" for="salesPrice">Sale Price 1</label>
+                                <div class="input-group">
+                                    <input ng-model="model.salesPrice" placeholder="Sale unit price" type="text" class="form-control form-control-sm" id="salesPrice" name="salesPrice" ng-pattern="/^\d{0,100}.{0,1}\d{0,10}?$/" />
+                                </div>
+                                <span ng-show="frm.salesPrice.$touched && frm.salesPrice.$invalid" style="color:red">Please provide number/decimal only</span>
+                            </div>
+
+                            <div class="col-6 mb-2">
+                                <label class="control-label text-sm-left text-dark font-weight-bolder" for="salesPriceAfterTax">Sale Price 1 after Tax</label>
+                                <div class="input-group">
+                                    <input ng-model="model.salesPriceAfterTax" placeholder="Sale unit price" type="text" class="form-control form-control-sm" id="salesPriceAfterTax" name="salesPriceAfterTax" ng-pattern="/^\d{0,100}.{0,1}\d{0,10}?$/" />
+
+                                </div>
+                                <span ng-show="frm.salesPriceAfterTax.$touched && frm.salesPriceAfterTax.$invalid" style="color:red">Please provide number/decimal only</span>
+                            </div>
+
+                            <div class="col-6 mb-2">
+                                <label class="control-label text-sm-left text-dark font-weight-bolder" for="salesPrice2">Sale Price 2</label>
+                                <div class="input-group">
+                                    <input ng-model="model.salesPrice2" placeholder="Sale unit price" type="text" class="form-control form-control-sm" id="salesPrice2" name="salesPrice2" ng-pattern="/^\d{0,100}.{0,1}\d{0,10}?$/" />
+
+                                </div>
+                                <span ng-show="frm.salesPrice2.$touched && frm.salesPrice2.$invalid" style="color:red">Please provide number/decimal only</span>
+                            </div>
+
+                            <div class="col-6 mb-2">
+                                <label class="control-label text-sm-left text-dark font-weight-bolder" for="salesPriceAfterTax2">Sale Price 2 after Tax</label>
+                                <div class="input-group">
+                                    <input ng-model="model.salesPriceAfterTax2" placeholder="Sale unit price" type="text" class="form-control form-control-sm" id="salesPriceAfterTax2" name="salesPriceAfterTax2" ng-pattern="/^\d{0,100}.{0,1}\d{0,10}?$/" />
+
+                                </div>
+                                <span ng-show="frm.salesPriceAfterTax2.$touched && frm.salesPriceAfterTax2.$invalid" style="color:red">Please provide number/decimal only</span>
+                            </div>
+
+
+                            <div class="col-6 mb-2">
+                                <label class="control-label text-sm-left text-dark font-weight-bolder" for="salesPrice3">Sale Price 3</label>
+                                <div class="input-group">
+                                    <input ng-model="model.salesPrice3" placeholder="Sale unit price" type="text" class="form-control form-control-sm" id="salesPrice3" name="salesPrice3" ng-pattern="/^\d{0,100}.{0,1}\d{0,10}?$/" />
+
+                                </div>
+                                <span ng-show="frm.salesPrice3.$touched && frm.salesPrice3.$invalid" style="color:red">Please provide number/decimal only</span>
+                            </div>
+
+                            <div class="col-6 mb-2">
+                                <label class="control-label text-sm-left text-dark font-weight-bolder" for="salesPriceAfterTax3">Sale Price 3 after Tax</label>
+                                <div class="input-group">
+                                    <input ng-model="model.salesPriceAfterTax3" placeholder="Sale unit price" type="text" class="form-control form-control-sm" id="salesPriceAfterTax3" name="salesPriceAfterTax3" ng-pattern="/^\d{0,100}.{0,1}\d{0,10}?$/" />
+
+                                </div>
+                                <span ng-show="frm.salesPriceAfterTax3.$touched && frm.salesPriceAfterTax3.$invalid" style="color:red">Please provide number/decimal only</span>
+                            </div>
+
+                            <div class="col-6 mb-2">
+                                <label class="control-label text-sm-left text-dark font-weight-bolder" for="fixedSalePrice">Fixed Sale Price</label>
+                                <div class="input-group">
+                                    <input ng-model="model.fixedSalePrice" placeholder="Sale unit price" type="text" class="form-control form-control-sm" id="fixedSalePrice" name="fixedSalePrice" ng-pattern="/^\d{0,100}.{0,1}\d{0,10}?$/" />
+
+                                </div>
+                                <span ng-show="frm.fixedSalePrice.$touched && frm.fixedSalePrice.$invalid" style="color:red">Please provide number/decimal only</span>
+                            </div>
+
+                            <div class="col-6 mb-2">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <div class="custom-control custom-checkbox">
+                                            <input ng-model="model.isSalePriceAfterTax" type="checkbox" class="custom-control-input" id="isSalePriceAfterTax" name="isSalePriceAfterTax">
+                                            <label class="custom-control-label text-dark" for="isSalePriceAfterTax">Choose After Tax Price</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+
                         <div class="col-6 mb-2">
                             <label class="control-label text-sm-left text-dark font-weight-bolder" for="repositoryId">Repository</label>
                             <div class="input-group">
@@ -95,7 +160,7 @@
                                     <option ng-repeat="item in GetAllRepository" value="{{item.id}}">{{item.text}}</option>
                                 </select>
                                 <div class="input-group-append">
-                                    <button class="btn btn-sm btn-primary" style="height: 28px;"><i class="fas fa-plus"></i></button>
+                                    <a href="/Repository/Create" class="btn btn-sm btn-primary" style="height: 28px" type="button"><i class="fas fa-plus"></i>&nbsp;</a>
                                 </div>
                             </div>
 

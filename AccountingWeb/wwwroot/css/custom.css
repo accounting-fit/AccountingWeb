@@ -1,0 +1,94 @@
+﻿* {
+    font-family: Inter;
+    font-style: normal;
+}
+.btn-filter {
+    padding: 3px !important;
+    font-size: .90rem !important;
+    width: 4.90em !important;
+}
+
+.w-80 {
+    width: 80% !important;
+}
+
+ thead {
+    background: #F4F2FF;
+}
+
+thead th {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #6E6893;
+}
+
+.table-data-font {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #25213B;
+}
+
+.table-data-font-sm {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.05em;
+    color: #6E6893;
+}
+
+.badge-success {
+    background-color: #CDFFCD;
+    color: #007F00 !important;
+}
+
+.badge-default {
+    background: #E6E6F2;
+    border-radius: 30px;
+}
+
+.badge-danger {
+    background: #FFE0E0;
+    color: #D30000 !important;
+}
+
+.badge-warning {
+    background: #FFECCC;
+    color: #965E00 !important;
+}
+
+ tfoot {
+    background: #F4F2FF;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+    height: 45px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: 0.05em;  
+    color: #6E6893;
+}
+
+tfoot select {
+    background-color: transparent;
+    border: none;
+}
+
+
+.select2-container--default .select2-selection--single {
+    border-radius: 0px !important;
+}
+
+input.ng-touched.ng-invalid {
+    border: 2px solid red;
+}
